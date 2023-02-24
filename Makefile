@@ -9,4 +9,4 @@ start:	install
 	pnpm --dir frontend/ dev
 
 lint:	install
-	pnpm --dir frontend/ lint
+	pnpm --dir frontend/ lint:fix
