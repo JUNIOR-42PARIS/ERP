@@ -1,82 +1,108 @@
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+  <nav v-if="!!user">
+    <img src="./assets/logo.png" alt="Logo" id="navbar-logo">
+    <RouterLink to="/" exact-active-class="active">Accueil</RouterLink>
+    <RouterLink to="/missions" active-class="active">Missions</RouterLink>
+    <RouterLink to="/reunions" active-class="active">Réunions</RouterLink>
+    <RouterLink to="/ressources-humaines" active-class="active">RH</RouterLink>
+    <NavbarNotification id="notification" />
+    <button id="user">
+      <img :src="user.user_metadata.picture" alt="Avatar">
+      {{ user.user_metadata.name }}
+      <CarretIcon :height="19" />
+    </button>
+  </nav>
 
   <RouterView />
 </template>
 
 <script setup lang="ts">
+import type { User } from '@supabase/supabase-js';
 import { RouterLink, RouterView } from 'vue-router'
+import { onMounted, ref, type Ref } from 'vue';
+
+import router from '@/router';
+import { supabase } from './stores/supabase';
+
+import NavbarNotification from './components/navbar/NavbarNotification.vue';
+import CarretIcon from './components/shared/icons/CarretIcon.vue';
+
+const user: Ref<undefined | User> = ref(undefined);
+
+onMounted(async () => {
+  const { data, error } = await supabase.auth.getUser();
+  if (error) {
+    console.error(error);
+    router.push("/login");
+    return;
+  }
+  user.value = data.user;
+})
+
+async function logout() {
+  await supabase.auth.signOut();
+  router.push("/login")
+}
 </script>
 
 
-<style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+<style lang="scss" scoped>
+@import "@/assets/variables.scss";
 
 nav {
+  background: $primary;
+
   width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
+  height: 80px;
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
+  a, button {
+    font-family: "Roboto", sans-serif;
+    border: 0;
+    line-height: 80px;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    background: transparent;
+    cursor: pointer;
+    min-width: 5em;
+    margin-right: 30px;
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    &.active {
+      font-weight: bold;
+    }
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
+  #navbar-logo {
+    height: 40px;
+    width: auto;
+    margin: auto 67px;
+  }
+  #notification {
+    margin-left: auto;
   }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+  button#user {
+    margin-right: 67px;
 
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
+    img, svg {
+      vertical-align: middle;
+    }
 
-    padding: 1rem 0;
-    margin-top: 1rem;
+    img {
+      border-radius: 40px;
+      height: 40px;
+      margin-right: 20px;
+    }
+
+    svg {
+      margin-left: 7px;
+    }
   }
 }
 </style>

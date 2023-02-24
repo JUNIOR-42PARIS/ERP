@@ -1,0 +1,21 @@
+name: Run lint and tests
+
+on: push
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 6
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'pnpm'
+          cache-dependency-path: |
+            frontend/pnpm-lock.yaml
+
+      - run: pnpm install --frozen-lockfile && pnpm --dir frontend/ install --frozen-lockfile
+      - run: pnpm lint --dir frontend/
+      - run: pnpm test --dir frontend/
