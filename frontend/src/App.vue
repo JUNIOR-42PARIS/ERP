@@ -7,11 +7,16 @@
     <RouterLink to="/reunions" active-class="active">Réunions</RouterLink>
     <RouterLink to="/ressources-humaines" active-class="active">RH</RouterLink>
     <NavbarNotification id="notification" />
-    <button id="user">
-      <img :src="user.user_metadata.picture" alt="Avatar">
-      {{ user.user_metadata.name }}
-      <CarretIcon :height="19" />
-    </button>
+    <div id="user">
+      <button @click="toggleUserDropdown">
+        <img :src="user.user_metadata.picture" alt="Avatar">
+        {{ user.user_metadata.name }}
+        <CarretIcon :height="19" :rotation="getUserDropdownCarretRotation" />
+      </button>
+      <div id="user-dropdown" v-if="showUserDropdown">
+        <a @click="logout">Se déconnecter</a>
+      </div>
+    </div>
   </nav>
 
   <RouterView />
@@ -20,15 +25,17 @@
 <script setup lang="ts">
 import type { User } from '@supabase/supabase-js';
 import { RouterLink, RouterView } from 'vue-router'
-import { onMounted, ref, type Ref } from 'vue';
+import { computed, onMounted, ref, type Ref } from 'vue';
 
 import router from '@/router';
 import { supabase } from './stores/supabase';
 
 import NavbarNotification from './components/navbar/NavbarNotification.vue';
 import CarretIcon from './components/shared/icons/CarretIcon.vue';
+import RotationType from './types/rotation';
 
 const user: Ref<undefined | User> = ref(undefined);
+const showUserDropdown: Ref<boolean> = ref(false);
 
 onMounted(async () => {
   const { data, error } = await supabase.auth.getUser();
@@ -42,8 +49,20 @@ onMounted(async () => {
 
 async function logout() {
   await supabase.auth.signOut();
-  router.push("/login")
+  user.value = undefined;
+  router.push("/login");
 }
+
+function toggleUserDropdown(): void {
+  showUserDropdown.value = !showUserDropdown.value;
+}
+const getUserDropdownCarretRotation = computed((): RotationType => {
+  if (showUserDropdown.value) {
+    return RotationType.top;
+  }
+  return RotationType.bottom;
+});
+
 </script>
 
 
@@ -87,7 +106,8 @@ nav {
     margin-left: auto;
   }
 
-  button#user {
+  #user {
+    position: relative;
     margin-right: 67px;
 
     img, svg {
@@ -102,6 +122,22 @@ nav {
 
     svg {
       margin-left: 7px;
+    }
+
+    #user-dropdown {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      width: 100%;
+      transform: translateY(100%);
+      background-color: white;
+      padding: 8px 4px;
+
+      a {
+        color: black;
+        line-height: 16px;
+      }
     }
   }
 }

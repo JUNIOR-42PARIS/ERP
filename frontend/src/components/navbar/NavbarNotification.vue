@@ -9,7 +9,7 @@
 import { ref } from 'vue';
 import NotificationIcon from '../shared/icons/NotificationIcon.vue';
 
-const hasNotification = ref(true);
+const hasNotification = ref(false);
 </script>
 
 <style lang="scss" scoped>
