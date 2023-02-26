@@ -6,6 +6,7 @@ install:
 	pnpm --dir frontend/ install
 
 start:	install
+	npx supabase start
 	pnpm --dir frontend/ dev
 
 lint:	install

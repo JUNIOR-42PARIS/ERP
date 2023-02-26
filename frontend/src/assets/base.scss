@@ -1,6 +1,18 @@
 @import "./reset.css";
+@import "./variables.scss";
 
 body {
     font-family: 'Inter';
-    background-color: #F2F2F2;
+    background-color: $background-grey;
+}
+
+.container {
+    margin-top: 50px;
+    margin-right: 250px;
+    margin-left: 250px;
+}
+
+a.resource-link {
+    color: $primary;
+    text-decoration: none;
 }
