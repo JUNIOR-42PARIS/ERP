@@ -9,7 +9,7 @@
     <NavbarNotification id="notification" />
     <div id="user">
       <button @click="toggleUserDropdown">
-        <img :src="user.user_metadata.picture" alt="Avatar">
+        <img :src="user.user_metadata.picture" alt="Avatar" referrerpolicy="no-referrer">
         {{ user.user_metadata.name }}
         <CarretIcon :height="19" :rotation="getUserDropdownCarretRotation" />
       </button>
