@@ -76,3 +76,17 @@ alter table "public"."users_informations" add constraint "users_informations_rol
 alter table "public"."users_informations" validate constraint "users_informations_role_fkey";
 alter table "public"."users_informations" add constraint "users_informations_user_fkey" FOREIGN KEY ("user") REFERENCES auth.users(id) not valid;
 alter table "public"."users_informations" validate constraint "users_informations_user_fkey";
+
+create policy "Tous les intervenants voient les missions" on "public"."missions" as permissive for
+select
+    to authenticated using (true);
+
+create policy "Tous les intervenants voient les rôles" on "public"."roles" as permissive for
+select
+    to authenticated using (true);
+
+create policy "Chaque intervenant voit ses informations" on "public"."users_informations" as permissive for
+select
+    to authenticated using ( ( ("user"):: text = (auth.uid()):: text
+        )
+    );

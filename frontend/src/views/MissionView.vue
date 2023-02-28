@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <p  v-if="userStore.is_admin" @click="createMission">Nouvelle mission</p>
+
     <div class="bloc-missions">
       <div class="bloc-missions-entete">
         <h2>Missions en cours</h2>
@@ -20,6 +22,18 @@
 
 <script setup lang="ts">
 import MissionTable from "@/components/mission/MissionTable.vue";
+import { supabase, useUserStore } from "@/stores/supabase";
+
+const userStore = useUserStore()
+
+async function createMission() {
+  const { data, error } = await supabase
+    .from('missions')
+    .insert([
+      { numero_mission: 1, description: "test", created_by: userStore.user?.id },
+    ])
+    console.log(data, error)
+} 
 </script>
 
 <style lang="scss" scoped>
@@ -44,7 +58,7 @@ import MissionTable from "@/components/mission/MissionTable.vue";
       display: block;
       flex: 1;
       height: 1px;
-      background: #000;
+      background: $element-grey;
     }
   }
 }
