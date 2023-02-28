@@ -16,3 +16,13 @@ a.resource-link {
     color: $primary;
     text-decoration: none;
 }
+
+button.btn {
+    padding: 9px 18px;
+    background-color: $primary;
+    font-family: 'Inter', sans-serif;
+    color: $text-white;
+    font-weight: bold;
+    border: 0;
+    cursor: pointer;
+}

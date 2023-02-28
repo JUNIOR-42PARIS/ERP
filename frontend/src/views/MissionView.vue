@@ -1,13 +1,16 @@
 <template>
   <div class="container">
-    <p  v-if="userStore.is_admin" @click="createMission">Nouvelle mission</p>
+    <header>
+      <h1>Missions</h1>
+      <button v-if="userStore.is_admin" @click="createMission" class="btn">Nouvelle mission</button>
+    </header>
 
     <div class="bloc-missions">
       <div class="bloc-missions-entete">
         <h2>Missions en cours</h2>
         <div class="separateur"></div>
       </div>
-      <MissionTable></MissionTable>
+      <MissionTable :type="MissionStatus.mission"></MissionTable>
     </div>
     
     <div class="bloc-missions">
@@ -15,7 +18,7 @@
         <h2>Prospects en cours</h2>
         <div class="separateur"></div>
       </div>
-      <MissionTable></MissionTable>
+      <MissionTable :type="MissionStatus.prospect"></MissionTable>
     </div>
   </div>
 </template>
@@ -23,8 +26,16 @@
 <script setup lang="ts">
 import MissionTable from "@/components/mission/MissionTable.vue";
 import { supabase, useUserStore } from "@/stores/supabase";
+import { useMissionStore } from "@/stores/mission";
+import { onMounted } from "vue";
+import MissionStatus from "@/types/missionStatus";
 
-const userStore = useUserStore()
+const userStore = useUserStore();
+const missionStore = useMissionStore();
+
+onMounted(async () => {
+  await missionStore.fetchMissions();
+});
 
 async function createMission() {
   const { data, error } = await supabase
@@ -33,11 +44,23 @@ async function createMission() {
       { numero_mission: 1, description: "test", created_by: userStore.user?.id },
     ])
     console.log(data, error)
-} 
+}
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/variables.scss";
+
+header {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+
+  h1 {
+    font-size: 24px;
+  }
+}
 
 .bloc-missions {
   margin-bottom: 55px;

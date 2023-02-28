@@ -4,58 +4,81 @@
       <tr>
         <th class="left">
           <div class="sort">
-            <CarretIcon :height="12" :rotation="RotationType.top" />
-            <CarretIcon :height="12" :rotation="RotationType.bottom" />
+            <CarretIcon class="carret" color="white" :height="12" :rotation="RotationType.top" />
+            <CarretIcon class="carret" color="white" :height="12" :rotation="RotationType.bottom" />
           </div>
           Nom de la mission
         </th>
         <th class="left">
           <div class="sort">
-            <CarretIcon :height="12" :rotation="RotationType.top" />
-            <CarretIcon :height="12" :rotation="RotationType.bottom" />
+            <CarretIcon class="carret" color="white" :height="12" :rotation="RotationType.top" />
+            <CarretIcon class="carret" color="white" :height="12" :rotation="RotationType.bottom" />
           </div>
           Chef de projet
         </th>
         <th class="right">
           Dernière mise à jour
           <div class="sort">
-            <CarretIcon :height="12" :rotation="RotationType.top" />
-            <CarretIcon :height="12" :rotation="RotationType.bottom" />
+            <CarretIcon class="carret" color="white" :height="12" :rotation="RotationType.top" />
+            <CarretIcon class="carret" color="white" :height="12" :rotation="RotationType.bottom" />
           </div>
         </th>
         <th class="right">
           Date de création
           <div class="sort">
-            <CarretIcon :height="12" :rotation="RotationType.top" />
-            <CarretIcon :height="12" :rotation="RotationType.bottom" />
+            <CarretIcon class="carret" color="white" :height="12" :rotation="RotationType.top" />
+            <CarretIcon class="carret" color="white" :height="12" :rotation="RotationType.bottom" />
           </div>
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td><RouterLink class="lien-mission" to="/missions/mission-01">#mission-01</RouterLink></td>
-        <td><RouterLink to="/profile/cdp1">@cdp1</RouterLink></td>
-        <td class="date">20/02/2023</td>
-        <td class="date">01/09/2022</td>
+      <tr v-for="mission of missions" :key="mission.id">
+        <td><RouterLink class="lien-mission" to="/missions/mission-01">#mission-01</RouterLink></td> <!-- @TODO -->
+        <td><RouterLink to="/profile/cdp1">@cdp1</RouterLink></td> <!-- @TODO -->
+        <td class="date">{{ new Date(mission.created_at).toLocaleDateString('fr-FR') }}</td> <!-- @TODO -->
+        <td class="date">{{ new Date(mission.created_at).toLocaleDateString('fr-FR') }}</td>
       </tr>
-      <tr>
-        <td><RouterLink class="lien-mission" to="/missions/mission-01">#mission-01</RouterLink></td>
-        <td><RouterLink to="/profile/cdp1">@cdp1</RouterLink></td>
-        <td class="date">20/02/2023</td>
-        <td class="date">01/09/2022</td>
+      <tr v-if="missions.length === 0">
+        <td colspan="4" class="empty">Aucune mission à afficher</td>
       </tr>
     </tbody>
   </table>
 </template>
 
 <script lang="ts" setup>
+import MissionStatus from "@/types/missionStatus";
 import CarretIcon from "@/components/shared/icons/CarretIcon.vue";
+import { useMissionStore } from "@/stores/mission";
 import RotationType from "@/types/rotation";
+import { computed } from "vue";
+
+const props = defineProps({
+  type: {
+    type: String,
+    required: true,
+    default: MissionStatus.mission,
+    validator(value: string) {
+      return Object.keys(MissionStatus).includes(value);
+    },
+  }
+});
+
+const missionStore = useMissionStore();
+
+const missions = computed(() => {
+  if (!missionStore.missions)
+    return [];
+  return missionStore.missions?.filter((mission) => mission.status === props.type)
+})
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/variables.scss";
+
+.carret {
+  cursor: pointer;
+}
 
 table {
   width: 100%;
@@ -65,7 +88,7 @@ table {
 
   thead {
     background-color: $light-primary;
-    color: white;
+    color: $text-white;
     font-weight: 600;
     
     th {
@@ -131,6 +154,11 @@ table {
 
         &.date {
           text-align: right;
+          color: $text-grey;
+        }
+        
+        &.empty {
+          text-align: center;
           color: $text-grey;
         }
       }

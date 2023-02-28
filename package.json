@@ -5,6 +5,10 @@
   "devDependencies": {
     "supabase": "^1.38.7"
   },
+  "scripts": {
+    "start": "supabase start",
+    "build:types": "supabase gen types typescript --local > src/types/database.ts"
+  },
   "workspaces": [
     "frontend"
   ]
