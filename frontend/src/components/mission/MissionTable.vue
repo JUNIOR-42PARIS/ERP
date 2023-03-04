@@ -52,7 +52,6 @@ import CarretIcon from "@/components/shared/icons/CarretIcon.vue";
 import { useMissionStore } from "@/stores/mission";
 import RotationType from "@/types/rotation";
 import { computed } from "vue";
-import { string_to_slug } from "@/utils/string";
 
 const props = defineProps({
   type: {

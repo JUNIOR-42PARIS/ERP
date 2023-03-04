@@ -135,7 +135,7 @@ async function loadClients() {
 }
 
 async function createClient(): Promise<boolean> {
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from('clients')
     .insert([
       {
