@@ -20,16 +20,16 @@
         </div>
         <div v-else>
           <div class="form-row">
-            <TextInput :icon="FileIcon" name="client_name" label="Nom de la société" v-model="client.nom" :validation="isNameTextLengthValid()" :required="true" />
+            <TextInput :icon="UserIcon" name="client_name" label="Nom de la société" v-model="client.nom" :validation="isNameTextLengthValid()" :required="true" />
           </div>
           <div class="form-row">
-            <TextInput :icon="FileIcon" name="client_adresse" label="Adresse" v-model="client.adresse" :validation="isNameTextLengthValid(1, 250)" :required="true" />
+            <TextInput :icon="HomeIcon" name="client_adresse" label="Adresse" v-model="client.adresse" :validation="isNameTextLengthValid(1, 250)" :required="true" />
           </div>
           <div class="form-row">
-            <TextInput :icon="FileIcon" name="client_siret" label="SIRET" v-model="client.siret" :validation="isValidSiren(true)" />
+            <TextInput :icon="EntrepriseIcon" name="client_siret" label="SIRET" v-model="client.siret" :validation="isValidSiren(true)" />
           </div>
           <div class="form-row">
-            <TextInput :icon="FileIcon" name="client_numero_tva" label="Numéro de TVA" v-model="client.numero_tva" />
+            <TextInput :icon="EuroIcon" name="client_numero_tva" label="Numéro de TVA" v-model="client.numero_tva" />
           </div>
         </div>
       </section>
@@ -38,19 +38,19 @@
         <h3>Prospect/Mission</h3>
         
         <div class="form-row">
-          <TextInput :icon="FileIcon" name="mission_nom" label="Nom de la mission" v-model="missionName" :required="true"/>
+          <TextInput :icon="HashtagIcon" name="mission_nom" label="Nom de la mission" v-model="missionName" :required="true"/>
         </div>
         <div class="form-row">
           <TextInput :icon="FileIcon" name="mission_description" label="Description" v-model="mission.description" :validation="isNameTextLengthValid(1, 2000)" :required="true" />
         </div>
         <div class="form-row">
-          <TextInput :icon="FileIcon" name="mission_nom_intermediaire" label="Prénom Nom de l'intermédiaire" v-model="mission.nom_intermediaire"/>
+          <TextInput :icon="UserIcon" name="mission_nom_intermediaire" label="Prénom Nom de l'intermédiaire" v-model="mission.nom_intermediaire"/>
         </div>
         <div class="form-row">
-          <TextInput :icon="FileIcon" name="mission_email_intermediaire" label="Email de l'intermédiaire" v-model="mission.email_intermediaire"/>
+          <TextInput :icon="EmailIcon" name="mission_email_intermediaire" label="Email de l'intermédiaire" v-model="mission.email_intermediaire"/>
         </div>
         <div class="form-row">
-          <TextInput :icon="FileIcon" name="mission_telephone_intermediaire" label="Téléphone de l'intermédiaire" v-model="mission.telephone_intermediaire"/>
+          <TextInput :icon="PhoneIcon" name="mission_telephone_intermediaire" label="Téléphone de l'intermédiaire" v-model="mission.telephone_intermediaire"/>
         </div>
       </section>
     </div>
@@ -75,6 +75,13 @@ import { useMissionStore } from "@/stores/mission";
 import { isNameTextLengthValid, isValidSiren } from "@/utils/validation";
 import { ToastType, useToasterStore } from "@/stores/toaster";
 import { objectEmptyStringToNull } from "@/utils/string";
+import UserIcon from "@/components/shared/icons/UserIcon.vue";
+import HomeIcon from "@/components/shared/icons/HomeIcon.vue";
+import EntrepriseIcon from "@/components/shared/icons/EntrepriseIcon.vue";
+import EuroIcon from "@/components/shared/icons/EuroIcon.vue";
+import HashtagIcon from "@/components/shared/icons/HashtagIcon.vue";
+import EmailIcon from "@/components/shared/icons/EmailIcon.vue";
+import PhoneIcon from "@/components/shared/icons/PhoneIcon.vue";
 
 const userStore = useUserStore();
 const formStore = useFormStore();
