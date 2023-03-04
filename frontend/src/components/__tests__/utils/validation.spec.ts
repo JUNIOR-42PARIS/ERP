@@ -17,7 +17,7 @@ describe("isValidSiren", () => {
     expect(isValidSiren()('01234567890123456789')).toBe('Le SIREN doit être composé de 15 chiffres');
     expect(isValidSiren()('01234567890123a')).toBe('Le SIREN doit être composé de 15 chiffres');
     expect(isValidSiren()('aaaa5678901234')).toBe('Le SIREN doit être composé de 15 chiffres');
-  })
+  });
 });
 
 describe("isNameTextLengthValid", () => {

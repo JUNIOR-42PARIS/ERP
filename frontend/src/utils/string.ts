@@ -24,7 +24,7 @@ export function trim(value: string): string {
 export function emptyStringToNull(value: any): any {
   if (typeof value !== "string")
     return value;
-  const valueTrimed = trim(value)
+  const valueTrimed = trim(value);
   if (valueTrimed.length === 0) {
     return undefined;
   }
