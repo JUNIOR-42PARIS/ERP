@@ -59,7 +59,7 @@ export interface Database {
       }
       missions: {
         Row: {
-          client: string | null
+          client: string
           created_at: string | null
           created_by: string
           description: string | null
@@ -67,13 +67,14 @@ export interface Database {
           id: number
           lien_drive: string | null
           lien_github: string | null
+          nom: string
           nom_intermediaire: string | null
           numero_mission: number
           status: Database["public"]["Enums"]["mission_status"]
           telephone_intermediaire: string | null
         }
         Insert: {
-          client?: string | null
+          client: string
           created_at?: string | null
           created_by: string
           description?: string | null
@@ -81,13 +82,14 @@ export interface Database {
           id?: number
           lien_drive?: string | null
           lien_github?: string | null
+          nom: string
           nom_intermediaire?: string | null
           numero_mission?: number
           status?: Database["public"]["Enums"]["mission_status"]
           telephone_intermediaire?: string | null
         }
         Update: {
-          client?: string | null
+          client?: string
           created_at?: string | null
           created_by?: string
           description?: string | null
@@ -95,6 +97,7 @@ export interface Database {
           id?: number
           lien_drive?: string | null
           lien_github?: string | null
+          nom?: string
           nom_intermediaire?: string | null
           numero_mission?: number
           status?: Database["public"]["Enums"]["mission_status"]
@@ -175,7 +178,10 @@ export interface Database {
     Tables: {
       buckets: {
         Row: {
+          allowed_mime_types: string[] | null
+          avif_autodetection: boolean | null
           created_at: string | null
+          file_size_limit: number | null
           id: string
           name: string
           owner: string | null
@@ -183,7 +189,10 @@ export interface Database {
           updated_at: string | null
         }
         Insert: {
+          allowed_mime_types?: string[] | null
+          avif_autodetection?: boolean | null
           created_at?: string | null
+          file_size_limit?: number | null
           id: string
           name: string
           owner?: string | null
@@ -191,7 +200,10 @@ export interface Database {
           updated_at?: string | null
         }
         Update: {
+          allowed_mime_types?: string[] | null
+          avif_autodetection?: boolean | null
           created_at?: string | null
+          file_size_limit?: number | null
           id?: string
           name?: string
           owner?: string | null

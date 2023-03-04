@@ -3,11 +3,11 @@
   "npmClient": "pnpm",
   "useWorkspaces": true,
   "devDependencies": {
-    "supabase": "^1.38.7"
+    "supabase": "^1.41.6"
   },
   "scripts": {
     "start": "supabase start",
-    "build:types": "supabase gen types typescript --local > src/types/database.ts"
+    "build:types": "supabase gen types typescript --local > frontend/src/types/database.ts"
   },
   "workspaces": [
     "frontend"

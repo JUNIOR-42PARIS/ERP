@@ -90,9 +90,9 @@ const getUserDropdownCarretRotation = computed((): RotationType => {
 }
 
 .slide-form-leave-active {
-  transition: all .2s ease-in-out;
+  transition: all .2s ease-in;
   #form-flou, #form-side-panel {
-    transition: all .2s ease-in-out;
+    transition: all .2s ease-in;
   }
 }
 
@@ -102,8 +102,8 @@ const getUserDropdownCarretRotation = computed((): RotationType => {
     margin-left: 100% !important;
   }
   #form-flou {
-    width: 0% !important;
-    opacity: 0;
+    backdrop-filter: blur(0px) !important;
+    background-color: rgba(0, 0, 0, 0);
   }
 }
 
@@ -135,13 +135,13 @@ const getUserDropdownCarretRotation = computed((): RotationType => {
     left: 0;
     top: 0;
     height: 100vh;
-    width: calc(100% - 33.33%);
+    width: 100%;
 
     display: block;
-    background-color: rgba(0, 0, 0, 50%);
+    background-color: rgba(0, 0, 0, 25%);
     backdrop-filter: blur(5px);
-    z-index: 99;
     opacity: 1;
+    z-index: 99;
   }
 }
 
