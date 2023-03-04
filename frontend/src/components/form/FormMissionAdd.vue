@@ -72,9 +72,9 @@ import MissionStatus from "@/types/missionStatus";
 import Multiselect from 'vue-multiselect';
 import "vue-multiselect/dist/vue-multiselect.css";
 import { useMissionStore } from "@/stores/mission";
-import { isNameTextLengthValid, isValidSiren } from "@/types/validation";
+import { isNameTextLengthValid, isValidSiren } from "@/utils/validation";
 import { ToastType, useToasterStore } from "@/stores/toaster";
-import { object_empty_string_to_null } from "@/utils/string";
+import { objectEmptyStringToNull } from "@/utils/string";
 
 const userStore = useUserStore();
 const formStore = useFormStore();
@@ -140,7 +140,7 @@ async function loadClients() {
 async function createClient(): Promise<boolean> {
   const { error } = await supabase
     .from('clients')
-    .insert([object_empty_string_to_null(client.value)]);
+    .insert([objectEmptyStringToNull(client.value)]);
   if (error) {
     console.error(error);
     return false;
@@ -164,7 +164,7 @@ async function createMission() {
   const { error } = await supabase
     .from('missions')
     .insert([
-      object_empty_string_to_null({
+      objectEmptyStringToNull({
         ...mission.value,
         nom: missionName.value,
       }),

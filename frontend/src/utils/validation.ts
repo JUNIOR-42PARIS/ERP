@@ -1,3 +1,5 @@
+import { trim } from "./string";
+
 export type ValidationReturnType = string | true;
 
 const chiffres = "0123456789";
@@ -16,10 +18,11 @@ export function isValidSiren(optionnal: boolean = false): (value: string) => Val
 
 export function isNameTextLengthValid(min = 1, max = 50): (value: string) => ValidationReturnType {
   return function(value: string) {
-    if (value.length < min) {
+    const valueTrimed = trim(value);
+    if (valueTrimed.length < min) {
       return `Le texte est trop court (au moins ${min} caractères)`;
     }
-    if (value.length >= max) {
+    if (valueTrimed.length >= max) {
       return `Le texte est trop long (au max. ${max} caractères)`;
     }
     return true;

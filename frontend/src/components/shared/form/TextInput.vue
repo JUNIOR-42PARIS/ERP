@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ValidationReturnType } from "@/types/validation";
+import type { ValidationReturnType } from "@/utils/validation";
 import { computed, type Component } from "vue";
 
 const props = defineProps<{
