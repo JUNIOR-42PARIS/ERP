@@ -1,3 +1,4 @@
+import type { Database } from '@/types/database';
 import { createClient, type User } from '@supabase/supabase-js';
 import { defineStore } from 'pinia';
 import { ref, type Ref } from 'vue';
@@ -5,7 +6,7 @@ import { ref, type Ref } from 'vue';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
-export const supabase = createClient(supabaseUrl, supabaseKey);
+export const supabase = createClient<Database>(supabaseUrl, supabaseKey);
 
 export const useUserStore = defineStore('user', () => {
   const user: Ref<undefined | User> = ref(undefined);

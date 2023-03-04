@@ -1,8 +1,16 @@
 create table "public"."clients" (
-    "nom" text not null,
-    "adresse" text not null,
-    "siret" text,
-    "numero_tva" text,
+    "nom" text not null
+        constraint longueur_nom
+        CHECK (char_length(nom) > 0 and char_length(nom) <= 50),
+    "adresse" text not null
+        constraint longueur_adresse
+        CHECK (char_length(adresse) > 0 and char_length(adresse) <= 250),
+    "siret" text
+        constraint longueur_siret
+        CHECK (siret IS NULL OR char_length(siret) = 9),
+    "numero_tva" text 
+        constraint longueur_numero_tva
+        CHECK (siret IS NULL OR char_length(siret) = 13),
     "created_at" timestamp with time zone not null default now()
 );
 
