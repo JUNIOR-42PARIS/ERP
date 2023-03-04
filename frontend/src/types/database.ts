@@ -69,7 +69,6 @@ export interface Database {
           lien_github: string | null
           nom: string
           nom_intermediaire: string | null
-          numero_mission: number
           status: Database["public"]["Enums"]["mission_status"]
           telephone_intermediaire: string | null
         }
@@ -84,7 +83,6 @@ export interface Database {
           lien_github?: string | null
           nom: string
           nom_intermediaire?: string | null
-          numero_mission?: number
           status?: Database["public"]["Enums"]["mission_status"]
           telephone_intermediaire?: string | null
         }
@@ -99,7 +97,6 @@ export interface Database {
           lien_github?: string | null
           nom?: string
           nom_intermediaire?: string | null
-          numero_mission?: number
           status?: Database["public"]["Enums"]["mission_status"]
           telephone_intermediaire?: string | null
         }
