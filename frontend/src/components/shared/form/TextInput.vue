@@ -1,16 +1,32 @@
 <template>
-  <label :style="{fontStyle: props.required !== true ? 'italic' : ''}" :for="props.name">{{ props.label }}</label>
-  <div class="input">
-    <component :is="props.icon" class="icon" :width="20" :height="20" color="#A3A3A3" />
-    <input type="text" :name="props.name" v-model="value" :placeholder="props.label.toLowerCase()" :required="props.required === true">
+  <label :style="{fontStyle: props.required !== true ? 'italic' : ''}" :class="{ 'error': isError }" :for="props.name">{{ props.label }}</label>
+  <div class="input" :class="{'error': isError }">
+    <component :is="props.icon" class="icon" :width="20" :height="20" :color="isError ? '#B41F1F' : '#A3A3A3'" />
+    <input type="text" :id="props.name" :name="props.name" v-model="value" :placeholder="props.label.toLowerCase()" :required="props.required === true">
   </div>
+  <span v-if="isError" class="error-text">{{ isError }}</span>
 </template>
 
 <script setup lang="ts">
+import type { ValidationReturnType } from "@/types/validation";
 import { computed, type Component } from "vue";
 
-const props = defineProps<{ icon: Component, label: string, name: string, modelValue?: string, required?: boolean }>();
+const props = defineProps<{
+  icon: Component,
+  label: string,
+  name: string,
+  modelValue?: string,
+  required?: boolean,
+  validation?: (value: string) => ValidationReturnType
+}>();
 const emit = defineEmits(['update:modelValue']);
+
+const isError = computed(() => {
+  if (props.validation && props.validation(props.modelValue ?? "") !== true) {
+    return props.validation(props.modelValue ?? "");
+  }
+  return false;
+});
 
 const value = computed({
   get() {
@@ -28,6 +44,9 @@ const value = computed({
 label {
   display: block;
   padding-bottom: 10px;
+  &.error {
+    color: $text-red;
+  }
 }
 .input {
   width: 100%;
@@ -36,6 +55,14 @@ label {
   flex-flow: row nowrap;
   align-items: stretch;
   justify-content: stretch;
+
+  &.error {
+    border-color: $text-red;
+
+    input {
+      color: $text-red;
+    }
+  }
 
   .icon {
     padding: 10px;
@@ -50,5 +77,12 @@ label {
       outline: none;
     }
   }
+}
+
+span.error-text {
+  font-size: 12px;
+  display: block;
+  margin: 4px 0;
+  color: $text-red;
 }
 </style>

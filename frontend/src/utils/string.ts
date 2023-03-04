@@ -16,3 +16,20 @@ export function string_to_slug(str: string) {
 
   return str;
 }
+
+export function empty_string_to_null(value: any): any {
+  if (typeof value !== "string")
+    return value;
+  if (value.length === 0) {
+    return undefined;
+  }
+  return value;
+}
+
+
+export function object_empty_string_to_null<Type extends object>(obj: Type): Type {
+  for (const key of Object.keys(obj)) {
+    obj[key as keyof Type] = empty_string_to_null(obj[key as keyof Type]);
+  }
+  return obj;
+}

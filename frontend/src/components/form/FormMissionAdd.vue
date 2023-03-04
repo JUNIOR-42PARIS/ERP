@@ -20,13 +20,13 @@
         </div>
         <div v-else>
           <div class="form-row">
-            <TextInput :icon="FileIcon" name="client_name" label="Nom de la société" v-model="client.nom" :required="true" />
+            <TextInput :icon="FileIcon" name="client_name" label="Nom de la société" v-model="client.nom" :validation="isNameTextLengthValid()" :required="true" />
           </div>
           <div class="form-row">
-            <TextInput :icon="FileIcon" name="client_adresse" label="Adresse" v-model="client.adresse" :required="true" />
+            <TextInput :icon="FileIcon" name="client_adresse" label="Adresse" v-model="client.adresse" :validation="isNameTextLengthValid(1, 250)" :required="true" />
           </div>
           <div class="form-row">
-            <TextInput :icon="FileIcon" name="client_siret" label="SIRET" v-model="client.siret" />
+            <TextInput :icon="FileIcon" name="client_siret" label="SIRET" v-model="client.siret" :validation="isValidSiren(true)" />
           </div>
           <div class="form-row">
             <TextInput :icon="FileIcon" name="client_numero_tva" label="Numéro de TVA" v-model="client.numero_tva" />
@@ -38,10 +38,10 @@
         <h3>Prospect/Mission</h3>
         
         <div class="form-row">
-          <TextInput :icon="FileIcon" name="mission_nom" label="Nom de la mission" v-model="missionName"/>
+          <TextInput :icon="FileIcon" name="mission_nom" label="Nom de la mission" v-model="missionName" :required="true"/>
         </div>
         <div class="form-row">
-          <TextInput :icon="FileIcon" name="mission_description" label="Description" v-model="mission.description" :required="true" />
+          <TextInput :icon="FileIcon" name="mission_description" label="Description" v-model="mission.description" :validation="isNameTextLengthValid(1, 2000)" :required="true" />
         </div>
         <div class="form-row">
           <TextInput :icon="FileIcon" name="mission_nom_intermediaire" label="Prénom Nom de l'intermédiaire" v-model="mission.nom_intermediaire"/>
@@ -72,6 +72,9 @@ import MissionStatus from "@/types/missionStatus";
 import Multiselect from 'vue-multiselect';
 import "vue-multiselect/dist/vue-multiselect.css";
 import { useMissionStore } from "@/stores/mission";
+import { isNameTextLengthValid, isValidSiren } from "@/types/validation";
+import { ToastType, useToasterStore } from "@/stores/toaster";
+import { object_empty_string_to_null } from "@/utils/string";
 
 const userStore = useUserStore();
 const formStore = useFormStore();
@@ -87,10 +90,10 @@ const client: Ref<Database["public"]["Tables"]["clients"]["Insert"]> = ref({
   siret: "",
 });
 
-const mission = ref({
+const mission: Ref<Database["public"]["Tables"]["missions"]["Insert"]> = ref({
   nom: "",
   client: client.value.nom,
-  created_by: userStore.user?.id,
+  created_by: userStore.user?.id ?? "",
   description: "",
   status: MissionStatus.prospect,
   nom_intermediaire: "",
@@ -137,13 +140,7 @@ async function loadClients() {
 async function createClient(): Promise<boolean> {
   const { error } = await supabase
     .from('clients')
-    .insert([
-      {
-        ...client.value,
-        numero_tva: client.value.numero_tva ?? undefined,
-        siret: client.value.siret ?? undefined,
-      }
-    ]);
+    .insert([object_empty_string_to_null(client.value)]);
   if (error) {
     console.error(error);
     return false;
@@ -155,19 +152,26 @@ async function createMission() {
   if (!existingClient.value) {
     const isClientCreated = await createClient();
     if (!isClientCreated) {
-      /** @todo Erreur à afficher ici */
+      useToasterStore().addToast("Une erreur est survenue à la création du client.", ToastType.error);
       return;
     }
     mission.value.client = client.value.nom;
+    
+    await loadClients();
+    existingClient.value = true;
   }
 
   const { error } = await supabase
     .from('missions')
     .insert([
-      mission.value,
+      object_empty_string_to_null({
+        ...mission.value,
+        nom: missionName.value,
+      }),
     ]);
   if (error) {
     console.log(error);
+    useToasterStore().addToast(`Une erreur est survenue à la création de la mission: ${error.message}`, ToastType.error);
     return;
   }
 

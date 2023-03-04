@@ -1,5 +1,11 @@
 
 <template>
+  <div id="toaster">
+    <div v-for="toast of toasterStore.toasts" :key="toast.id" @click="() => toasterStore.removeToast(toast.id)" class="toast" :class="toast.type">
+      {{ toast.content }}
+    </div>
+  </div>
+
   <Transition name="slide-form">
     <div v-if="!!formStore.selectedForm" id="form">
       <div id="form-flou" @click="() => formStore.closeForm()"></div>
@@ -46,10 +52,12 @@ import CarretIcon from './components/shared/icons/CarretIcon.vue';
 import RotationType from './types/rotation';
 import { useUserStore } from '@/stores/supabase';
 import { useFormStore } from './stores/form';
+import { useToasterStore } from './stores/toaster';
 
 const showUserDropdown: Ref<boolean> = ref(false);
 const userStore = useUserStore();
 const formStore = useFormStore();
+const toasterStore = useToasterStore();
 
 onMounted(async () => {
   const { data, error } = await supabase.auth.getUser();
@@ -81,6 +89,28 @@ const getUserDropdownCarretRotation = computed((): RotationType => {
 
 <style lang="scss" scoped>
 @import "@/assets/variables.scss";
+
+#toaster {
+  position: fixed;
+  top: 90px;
+  right: 10px;
+
+  .toast {
+    padding: 15px 20px;
+    background-color: $light-primary;
+    border: 1px solid darken($light-primary, 15%);
+    color: white;
+    width: 250px;
+    font-size: 12px;
+
+    &.error {
+      background-color: $text-red;
+      border: 1px solid darken($text-red, 15%);
+    }
+  }
+
+  z-index: 1000;
+}
 
 .slide-form-enter-active {
   transition: all .2s ease-in-out;
