@@ -36,5 +36,5 @@ const getRotation = computed((): number => {
             return 270;
     }
     return 0;
-})
+});
 </script>

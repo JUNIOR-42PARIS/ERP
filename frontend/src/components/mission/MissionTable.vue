@@ -69,8 +69,8 @@ const missionStore = useMissionStore();
 const missions = computed(() => {
   if (!missionStore.missions)
     return [];
-  return missionStore.missions?.filter((mission) => mission.status === props.type)
-})
+  return missionStore.missions?.filter((mission) => mission.status === props.type);
+});
 </script>
 
 <style lang="scss" scoped>

@@ -18,5 +18,5 @@ const props = defineProps({
         type: Number
     },
     color: String
-})
+});
 </script>

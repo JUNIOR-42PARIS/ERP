@@ -116,9 +116,9 @@ const missionName = computed({
       else
         clientName = client.value.nom;
 
-      return `${clientName}-${String(numeroMission).padStart(2, '0')}`
+      return `${clientName}-${String(numeroMission).padStart(2, '0')}`;
     } else {
-      return mission.value.nom
+      return mission.value.nom;
     }
   }
 });
@@ -143,7 +143,7 @@ async function createClient(): Promise<boolean> {
         numero_tva: client.value.numero_tva ?? undefined,
         siret: client.value.siret ?? undefined,
       }
-    ])
+    ]);
   if (error) {
     console.error(error);
     return false;
@@ -165,9 +165,9 @@ async function createMission() {
     .from('missions')
     .insert([
       mission.value,
-    ])
+    ]);
   if (error) {
-    console.log(error)
+    console.log(error);
     return;
   }
 

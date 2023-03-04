@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router';
 import { computed, onMounted, ref, type Ref } from 'vue';
 
 import router from '@/router';
@@ -43,7 +43,7 @@ import { supabase } from './stores/supabase';
 
 import NavbarNotification from './components/navbar/NavbarNotification.vue';
 import CarretIcon from './components/shared/icons/CarretIcon.vue';
-import RotationType from './types/rotation'
+import RotationType from './types/rotation';
 import { useUserStore } from '@/stores/supabase';
 import { useFormStore } from './stores/form';
 
@@ -59,7 +59,7 @@ onMounted(async () => {
     return;
   }
   userStore.setUser(data.user);
-})
+});
 
 async function logout() {
   userStore.logout();

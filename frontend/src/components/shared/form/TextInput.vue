@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import { computed, type Component } from "vue";
 
-const props = defineProps<{ icon: Component, label: string, name: string, modelValue?: string, required?: boolean }>()
+const props = defineProps<{ icon: Component, label: string, name: string, modelValue?: string, required?: boolean }>();
 const emit = defineEmits(['update:modelValue']);
 
 const value = computed({
@@ -17,9 +17,9 @@ const value = computed({
     return props.modelValue;
   },
   set(value) {
-    emit("update:modelValue", value)
+    emit("update:modelValue", value);
   }
-})
+});
 </script>
 
 <style lang="scss" scoped>
