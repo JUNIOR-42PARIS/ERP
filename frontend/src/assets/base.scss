@@ -25,4 +25,91 @@ button.btn {
     font-weight: bold;
     border: 0;
     cursor: pointer;
+
+    &.grey {
+        background-color: transparent;
+        transition: background-color .3s ease-in-out;
+        color: $element-grey;
+
+        &:hover {
+            background: $background-grey;
+        }
+    }
+}
+
+.form-container {
+    height: calc(100vh - 80px * 2);
+    overflow: scroll;
+    padding: 45px 40px;
+    box-sizing: border-box;
+
+    .form-row {
+        margin-bottom: 10px;
+        font-size: 14px;
+
+        &.form-checkbox {
+            label {
+                padding-left: 10px;
+            }
+        }
+    }
+
+    section {
+        margin-top: 35px;
+
+        h3 {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 100%;
+            gap: 37px;
+            font-size: 16px;
+            margin-bottom: 15px;
+
+            &::after {
+                content: '';
+                display: block;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                height: 1px;
+                flex: 1;
+                background-color: $element-grey;
+                z-index: -1;
+            }
+        }
+    }
+}
+
+.form-footer {
+    position: relative;
+    height: 80px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 40px;
+    gap: 8px;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: calc(100% - 40px * 2);
+        height: 1px;
+        margin: 0 40px;
+        background-color: $element-grey;
+    }
+
+    .btn {
+        width: 150px;
+        font-size: 16px;
+        line-height: 23px;
+        font-weight: normal;
+    }
 }

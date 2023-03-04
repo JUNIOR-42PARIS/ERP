@@ -2,7 +2,7 @@
   <div class="container">
     <header>
       <h1>Missions</h1>
-      <button v-if="userStore.is_admin" @click="createMission" class="btn">Nouvelle mission</button>
+      <button v-if="userStore.is_admin" @click="() => formStore.showMissionCreate()" class="btn">Nouvelle mission</button>
     </header>
 
     <div class="bloc-missions">
@@ -25,26 +25,19 @@
 
 <script setup lang="ts">
 import MissionTable from "@/components/mission/MissionTable.vue";
-import { supabase, useUserStore } from "@/stores/supabase";
+import { useUserStore } from "@/stores/supabase";
 import { useMissionStore } from "@/stores/mission";
 import { onMounted } from "vue";
 import MissionStatus from "@/types/missionStatus";
+import { useFormStore } from "@/stores/form";
 
+const formStore = useFormStore();
 const userStore = useUserStore();
 const missionStore = useMissionStore();
 
 onMounted(async () => {
   await missionStore.fetchMissions();
 });
-
-async function createMission() {
-  const { data, error } = await supabase
-    .from('missions')
-    .insert([
-      { numero_mission: 1, description: "test", created_by: userStore.user?.id },
-    ])
-    console.log(data, error)
-}
 </script>
 
 <style lang="scss" scoped>
