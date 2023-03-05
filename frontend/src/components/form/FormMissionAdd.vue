@@ -44,13 +44,13 @@
           <TextInput :icon="FileIcon" name="mission_description" label="Description" v-model="mission.description" :validation="isNameTextLengthValid(1, 2000)" :required="true" />
         </div>
         <div class="form-row">
-          <TextInput :icon="UserIcon" name="mission_nom_intermediaire" label="Prénom Nom de l'intermédiaire" v-model="mission.nom_intermediaire"/>
+          <TextInput :icon="UserIcon" name="mission_nom_intermediaire" label="Prénom Nom de l'intermédiaire" v-model="mission.nom_intermediaire"  :validation="isNameTextLengthValid()"/>
         </div>
         <div class="form-row">
-          <TextInput :icon="EmailIcon" name="mission_email_intermediaire" label="Email de l'intermédiaire" v-model="mission.email_intermediaire"/>
+          <TextInput :icon="EmailIcon" name="mission_email_intermediaire" label="Email de l'intermédiaire" v-model="mission.email_intermediaire"  :validation="isNameTextLengthValid()"/>
         </div>
         <div class="form-row">
-          <TextInput :icon="PhoneIcon" name="mission_telephone_intermediaire" label="Téléphone de l'intermédiaire" v-model="mission.telephone_intermediaire"/>
+          <TextInput :icon="PhoneIcon" name="mission_telephone_intermediaire" label="Téléphone de l'intermédiaire" v-model="mission.telephone_intermediaire"  :validation="isNameTextLengthValid(0, 10)"/>
         </div>
       </section>
     </div>
@@ -125,6 +125,9 @@ const missionName = computed({
         clientName = mission.value.client;
       else
         clientName = client.value.nom;
+
+      if (clientName === "")
+        return "";
 
       return `${clientName}-${String(numeroMission).padStart(2, '0')}`;
     } else {
