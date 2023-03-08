@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.10.0",
-    "pinia": "^2.0.32",
+    "pinia": "^2.0.33",
     "sass": "^1.58.3",
     "vue": "^3.2.47",
     "vue-multiselect": "3.0.0-beta.1",

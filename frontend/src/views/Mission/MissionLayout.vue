@@ -1,0 +1,84 @@
+<template>
+  <header>
+    <div id="header-details">
+      <h1>Test</h1>
+      <p>Chef de projet <RouterLink to="/membre/user1" class="resource-link">@user1</RouterLink></p>
+    </div>
+    <button class="btn">+ Ajouter un BC</button>
+  </header>
+  <nav>
+    <RouterLink :to="`/missions/${idMission}/`" exact-active-class="active">Résumé</RouterLink>
+    <RouterLink :to="`/missions/${idMission}/phases`" exact-active-class="active">Phases</RouterLink>
+    <RouterLink :to="`/missions/${idMission}/documents`" exact-active-class="active">Documents</RouterLink>
+    <RouterLink :to="`/missions/${idMission}/membres`" exact-active-class="active">Membres</RouterLink>
+    <RouterLink :to="`/missions/${idMission}/calendrier`" exact-active-class="active">Calendrier</RouterLink>
+  </nav>
+</template>
+
+<script lang="ts" setup>
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+
+const idMission = route.params.idMission;
+
+</script>
+
+<style lang="scss" scoped>
+@import "@/assets/variables.scss";
+
+header {
+  width: 100%;
+  height: 180px;
+  background: url("@/assets/Background.svg");
+  background-size: cover;
+  background-position: center bottom;
+  padding: 0 250px;
+
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+
+  #header-details {
+    h1 {
+      font-family: "Inter", sans-serif;
+      font-weight: 600;
+      font-size: 32px;
+      color: $text-white;
+      margin-bottom: 5px;
+    }
+    p {
+      color: $text-white;
+      font-size: 20px;
+    }
+  }
+}
+
+nav {
+  width: 100%;
+  padding: 0 250px;
+  background-color: $bg-white;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
+
+  a {
+    color: $text-primary;
+    font-size: 15px;
+    line-height: 60px;
+    font-size: "Roboto", sans-serif;
+    text-decoration: none;
+
+    &.active {
+      font-weight: bold;
+      border-bottom: solid 3px $primary;
+    }
+  }
+}
+</style>

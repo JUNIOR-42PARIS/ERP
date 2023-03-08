@@ -18,12 +18,18 @@ const router = createRouter({
     {
       path: '/missions',
       name: 'missions',
-      component: () => import('../views/MissionView.vue'),
+      component: () => import('../views/MissionView.vue')
     },
     {
-      path: '/missions/:id',
-      name: 'missions-view',
-      component: () => import('../views/Mission/IndexMissionView.vue'),
+      path: '/missions/:idMission',
+      component: () => import('../views/Mission/MissionLayout.vue'),
+      children: [
+        {
+          path: '',
+          name: 'missions-index',
+          component: () => import('../views/Mission/MissionResumeView.vue')
+        }
+      ]
     }
   ]
 });

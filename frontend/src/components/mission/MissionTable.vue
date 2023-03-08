@@ -34,7 +34,7 @@
     </thead>
     <tbody>
       <tr v-for="mission of missions" :key="mission.id">
-        <td><RouterLink class="lien-mission" :to="`/missions/${mission.nom}`">#{{ mission.nom }}</RouterLink></td> <!-- @TODO -->
+        <td><RouterLink class="lien-mission" :to="{ name: 'missions-index', params: { idMission: mission.nom } }">#{{ mission.nom }}</RouterLink></td> <!-- @TODO -->
         <td><RouterLink to="/profile/cdp1">@cdp1</RouterLink></td> <!-- @TODO -->
         <td class="date">{{ new Date(mission.created_at).toLocaleDateString('fr-FR') }}</td> <!-- @TODO -->
         <td class="date">{{ new Date(mission.created_at).toLocaleDateString('fr-FR') }}</td>

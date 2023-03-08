@@ -5,8 +5,8 @@
 
   <nav v-if="!!userStore.user">
     <img src="./assets/logo.png" alt="Logo" id="navbar-logo">
-    <RouterLink to="/" exact-active-class="active">Accueil</RouterLink>
-    <RouterLink to="/missions" active-class="active">Missions</RouterLink>
+    <RouterLink :to="{ name: 'index' }" exact-active-class="active">Accueil</RouterLink>
+    <RouterLink :to="{ name: 'missions' }" active-class="active">Missions</RouterLink>
     <RouterLink to="/reunions" active-class="active">Réunions</RouterLink>
     <RouterLink to="/ressources-humaines" active-class="active">RH</RouterLink>
     <NavbarNotification id="notification" />
