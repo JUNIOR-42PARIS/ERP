@@ -1,27 +1,37 @@
 <template>
-  <header>
-    <div id="header-details">
-      <h1>Test</h1>
-      <p>Chef de projet <RouterLink to="/membre/user1" class="resource-link">@user1</RouterLink></p>
+  <Suspense>
+    <div v-if="mission">
+      <header>
+        <div id="header-details">
+          <h1>{{ mission.nom }}</h1>
+          <p>Chef de projet <RouterLink to="/membre/user1" class="resource-link">@user1</RouterLink></p>
+        </div>
+        <button class="btn">+ Ajouter un BC</button>
+      </header>
+      <nav>
+        <RouterLink :to="`/missions/${mission.nom}/`" exact-active-class="active">Résumé</RouterLink>
+        <RouterLink :to="`/missions/${mission.nom}/phases`" exact-active-class="active">Phases</RouterLink>
+        <RouterLink :to="`/missions/${mission.nom}/documents`" exact-active-class="active">Documents</RouterLink>
+        <RouterLink :to="`/missions/${mission.nom}/membres`" exact-active-class="active">Membres</RouterLink>
+        <RouterLink :to="`/missions/${mission.nom}/calendrier`" exact-active-class="active">Calendrier</RouterLink>
+      </nav>
+
+      <div class="container" v-if="mission">
+        <RouterView :mission="mission" />
+      </div>
     </div>
-    <button class="btn">+ Ajouter un BC</button>
-  </header>
-  <nav>
-    <RouterLink :to="`/missions/${idMission}/`" exact-active-class="active">Résumé</RouterLink>
-    <RouterLink :to="`/missions/${idMission}/phases`" exact-active-class="active">Phases</RouterLink>
-    <RouterLink :to="`/missions/${idMission}/documents`" exact-active-class="active">Documents</RouterLink>
-    <RouterLink :to="`/missions/${idMission}/membres`" exact-active-class="active">Membres</RouterLink>
-    <RouterLink :to="`/missions/${idMission}/calendrier`" exact-active-class="active">Calendrier</RouterLink>
-  </nav>
+    <template #fallback>
+      Loading...
+    </template>
+  </Suspense>
 </template>
 
 <script lang="ts" setup>
-import { useRoute } from 'vue-router';
+import { useMissionStore } from '@/stores/mission';
 
-const route = useRoute();
+const missionStore = useMissionStore();
 
-const idMission = route.params.idMission;
-
+const mission = await missionStore.fetchMissionFromUrl();
 </script>
 
 <style lang="scss" scoped>

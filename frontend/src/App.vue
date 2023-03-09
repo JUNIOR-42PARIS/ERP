@@ -22,7 +22,12 @@
     </div>
   </nav>
 
-  <RouterView />
+  <Suspense>
+    <RouterView />
+    <template #fallback>
+      Loading
+    </template>
+  </Suspense>
 </template>
 
 <script setup lang="ts">

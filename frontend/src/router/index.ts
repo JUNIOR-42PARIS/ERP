@@ -28,7 +28,27 @@ const router = createRouter({
           path: '',
           name: 'missions-index',
           component: () => import('../views/Mission/MissionResumeView.vue')
-        }
+        },
+        {
+          path: 'phases',
+          name: 'missions-phases',
+          component: () => import('../views/Mission/MissionResumeView.vue')
+        },
+        {
+          path: 'documents',
+          name: 'missions-documents',
+          component: () => import('../views/Mission/MissionResumeView.vue')
+        },
+        {
+          path: 'membres',
+          name: 'missions-membres',
+          component: () => import('../views/Mission/MissionResumeView.vue')
+        },
+        {
+          path: 'calendrier',
+          name: 'missions-calendrier',
+          component: () => import('../views/Mission/MissionResumeView.vue')
+        },
       ]
     }
   ]
