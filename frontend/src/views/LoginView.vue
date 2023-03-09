@@ -12,7 +12,7 @@ import { onMounted } from 'vue';
 function login() {
   supabase.auth.signInWithOAuth({
     provider: "google"
-  })
+  });
 }
 
 onMounted(async () => {
@@ -25,6 +25,6 @@ onMounted(async () => {
   } catch (err) {
     //
   }
-})
+});
 </script>
 
