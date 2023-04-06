@@ -14,5 +14,5 @@ const props = defineProps({
         required: true,
         type: Number
     },
-})
+});
 </script>

@@ -1,29 +1,57 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import AccueilView from '../views/AccueilView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import AccueilView from '../views/AccueilView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
+      name: 'index',
       component: AccueilView
     },
-    
+
     {
       path: '/login',
       name: 'login',
       component: () => import('../views/LoginView.vue')
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      path: '/missions',
+      name: 'missions',
+      component: () => import('../views/MissionView.vue')
+    },
+    {
+      path: '/missions/:idMission',
+      component: () => import('../views/Mission/MissionLayout.vue'),
+      children: [
+        {
+          path: '',
+          name: 'missions-index',
+          component: () => import('../views/Mission/MissionResumeView.vue')
+        },
+        {
+          path: 'phases',
+          name: 'missions-phases',
+          component: () => import('../views/Mission/MissionResumeView.vue')
+        },
+        {
+          path: 'documents',
+          name: 'missions-documents',
+          component: () => import('../views/Mission/MissionResumeView.vue')
+        },
+        {
+          path: 'membres',
+          name: 'missions-membres',
+          component: () => import('../views/Mission/MissionResumeView.vue')
+        },
+        {
+          path: 'calendrier',
+          name: 'missions-calendrier',
+          component: () => import('../views/Mission/MissionResumeView.vue')
+        },
+      ]
     }
   ]
-})
+});
 
-export default router
+export default router;
