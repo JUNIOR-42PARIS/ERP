@@ -61,7 +61,7 @@ create table "public"."roles" (
 alter table "public"."roles" enable row level security;
 
 create table "public"."users_informations" (
-    "user" uuid not null,
+    "id_user" uuid not null,
     "role" text not null
 );
 
@@ -72,7 +72,7 @@ CREATE UNIQUE INDEX clients_pkey ON public.clients USING btree (nom);
 CREATE UNIQUE INDEX missions_intervenants_pkey ON public.missions_intervenants USING btree (id);
 CREATE UNIQUE INDEX missions_pkey ON public.missions USING btree (id);
 CREATE UNIQUE INDEX roles_pkey ON public.roles USING btree (name);
-CREATE UNIQUE INDEX users_informations_pkey ON public.users_informations USING btree ("user");
+CREATE UNIQUE INDEX users_informations_pkey ON public.users_informations USING btree ("id_user");
 
 alter table "public"."clients" add constraint "clients_pkey" PRIMARY KEY using index "clients_pkey";
 alter table "public"."missions" add constraint "missions_pkey" PRIMARY KEY using index "missions_pkey";
@@ -89,7 +89,7 @@ alter table "public"."missions_intervenants" add constraint "missions_intervenan
 alter table "public"."missions_intervenants" validate constraint "missions_intervenants_mission_fkey";
 alter table "public"."users_informations" add constraint "users_informations_role_fkey" FOREIGN KEY (role) REFERENCES roles(name) not valid;
 alter table "public"."users_informations" validate constraint "users_informations_role_fkey";
-alter table "public"."users_informations" add constraint "users_informations_user_fkey" FOREIGN KEY ("user") REFERENCES auth.users(id) not valid;
+alter table "public"."users_informations" add constraint "users_informations_user_fkey" FOREIGN KEY ("id_user") REFERENCES auth.users(id) not valid;
 alter table "public"."users_informations" validate constraint "users_informations_user_fkey";
 
 create policy "Tous les intervenants voient les missions" on "public"."missions" as permissive for
@@ -102,6 +102,6 @@ select
 
 create policy "Chaque intervenant voit ses informations" on "public"."users_informations" as permissive for
 select
-    to authenticated using ( ( ("user"):: text = (auth.uid()):: text
+    to authenticated using ( ( ("id_user"):: text = (auth.uid()):: text
         )
     );

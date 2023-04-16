@@ -52,14 +52,13 @@
 </template>
 
 <script setup lang="ts">
-import { supabase } from '@/stores/supabase';
-
-async function test() {
-  await supabase.functions.invoke('Notify', {
-    body: JSON.stringify({ name: 'Functions' }),
-  });
-}
-test();
+// import { supabase } from '@/stores/supabase';
+//
+// async function test() {
+//   const users = await supabase.functions.invoke('User');
+//   console.log(users);
+// }
+// test();
 </script>
 
 <style lang="scss" scoped>

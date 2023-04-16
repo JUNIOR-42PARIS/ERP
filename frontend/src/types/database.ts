@@ -125,31 +125,43 @@ export interface Database {
         Row: {
           color: string
           is_administration: boolean
+          is_member: boolean | null
           name: string
         }
         Insert: {
           color: string
           is_administration?: boolean
+          is_member?: boolean | null
           name: string
         }
         Update: {
           color?: string
           is_administration?: boolean
+          is_member?: boolean | null
           name?: string
         }
       }
       users_informations: {
         Row: {
+          created_at: string | null
+          id_user: string
+          name: string | null
+          pseudo: string | null
           role: string
-          user: string
         }
         Insert: {
+          created_at?: string | null
+          id_user: string
+          name?: string | null
+          pseudo?: string | null
           role: string
-          user: string
         }
         Update: {
+          created_at?: string | null
+          id_user?: string
+          name?: string | null
+          pseudo?: string | null
           role?: string
-          user?: string
         }
       }
     }

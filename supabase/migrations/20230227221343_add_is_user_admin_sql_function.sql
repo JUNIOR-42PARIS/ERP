@@ -14,7 +14,7 @@ BEGIN
 				FROM
 					public.users_informations
 				WHERE
-					users_informations.user:: text = $1
+					users_informations.id_user:: text = $1
 				LIMIT 1
 			)
 	);
