@@ -4,30 +4,53 @@
       <header>
         <div id="header-details">
           <h1>{{ mission.nom }}</h1>
-          <p>Chef de projet <RouterLink to="/membre/user1" class="resource-link">@user1</RouterLink></p>
+          <p>
+            Chef de projet
+            <RouterLink to="/membre/user1" class="resource-link"
+              >@user1</RouterLink
+            >
+          </p>
         </div>
         <button class="btn">+ Ajouter un BC</button>
       </header>
       <nav>
-        <RouterLink :to="`/missions/${mission.nom}/`" exact-active-class="active">Résumé</RouterLink>
-        <RouterLink :to="`/missions/${mission.nom}/phases`" exact-active-class="active">Phases</RouterLink>
-        <RouterLink :to="`/missions/${mission.nom}/documents`" exact-active-class="active">Documents</RouterLink>
-        <RouterLink :to="`/missions/${mission.nom}/membres`" exact-active-class="active">Membres</RouterLink>
-        <RouterLink :to="`/missions/${mission.nom}/calendrier`" exact-active-class="active">Calendrier</RouterLink>
+        <RouterLink
+          :to="`/missions/${mission.nom}/`"
+          exact-active-class="active"
+          >Résumé</RouterLink
+        >
+        <RouterLink
+          :to="`/missions/${mission.nom}/phases`"
+          exact-active-class="active"
+          >Phases</RouterLink
+        >
+        <RouterLink
+          :to="`/missions/${mission.nom}/documents`"
+          exact-active-class="active"
+          >Documents</RouterLink
+        >
+        <RouterLink
+          :to="`/missions/${mission.nom}/membres`"
+          exact-active-class="active"
+          >Membres</RouterLink
+        >
+        <RouterLink
+          :to="`/missions/${mission.nom}/calendrier`"
+          exact-active-class="active"
+          >Calendrier</RouterLink
+        >
       </nav>
 
       <div class="container" v-if="mission">
         <RouterView :mission="mission" />
       </div>
     </div>
-    <template #fallback>
-      Loading...
-    </template>
+    <template #fallback> Loading... </template>
   </Suspense>
 </template>
 
 <script lang="ts" setup>
-import { useMissionStore } from '@/stores/mission';
+import { useMissionStore } from "@/stores/mission";
 
 const missionStore = useMissionStore();
 

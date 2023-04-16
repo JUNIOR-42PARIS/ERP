@@ -1,8 +1,26 @@
 <template>
-  <label :style="{fontStyle: props.required !== true ? 'italic' : ''}" :class="{ 'error': isError }" :for="props.name">{{ props.label }}</label>
-  <div class="input" :class="{'error': isError }">
-    <component :is="props.icon" class="icon" :width="20" :height="20" :color="isError ? '#B41F1F' : '#A3A3A3'" />
-    <input type="text" :id="props.name" :name="props.name" v-model="value" :placeholder="props.label.toLowerCase()" :required="props.required === true">
+  <label
+    :style="{ fontStyle: props.required !== true ? 'italic' : '' }"
+    :class="{ error: isError }"
+    :for="props.name"
+    >{{ props.label }}</label
+  >
+  <div class="input" :class="{ error: isError }">
+    <component
+      :is="props.icon"
+      class="icon"
+      :width="20"
+      :height="20"
+      :color="isError ? '#B41F1F' : '#A3A3A3'"
+    />
+    <input
+      type="text"
+      :id="props.name"
+      :name="props.name"
+      v-model="value"
+      :placeholder="props.label.toLowerCase()"
+      :required="props.required === true"
+    />
   </div>
   <span v-if="isError" class="error-text">{{ isError }}</span>
 </template>
@@ -12,14 +30,14 @@ import type { ValidationReturnType } from "@/utils/validation";
 import { computed, type Component } from "vue";
 
 const props = defineProps<{
-  icon: Component,
-  label: string,
-  name: string,
-  modelValue?: string,
-  required?: boolean,
-  validation?: (value: string) => ValidationReturnType
+  icon: Component;
+  label: string;
+  name: string;
+  modelValue?: string;
+  required?: boolean;
+  validation?: (value: string) => ValidationReturnType;
 }>();
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(["update:modelValue"]);
 
 const isError = computed(() => {
   if (props.validation && props.validation(props.modelValue ?? "") !== true) {
@@ -34,7 +52,7 @@ const value = computed({
   },
   set(value) {
     emit("update:modelValue", value);
-  }
+  },
 });
 </script>
 

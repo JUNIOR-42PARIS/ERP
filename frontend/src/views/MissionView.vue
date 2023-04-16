@@ -2,7 +2,13 @@
   <div class="container">
     <header>
       <h1>Missions</h1>
-      <button v-if="userStore.is_admin" @click="() => formStore.showMissionCreate()" class="btn">Nouvelle mission</button>
+      <button
+        v-if="userStore.is_admin"
+        @click="() => formStore.showMissionCreate()"
+        class="btn"
+      >
+        Nouvelle mission
+      </button>
     </header>
 
     <div class="bloc-missions">
@@ -12,7 +18,7 @@
       </div>
       <MissionTable :type="MissionStatus.mission"></MissionTable>
     </div>
-    
+
     <div class="bloc-missions">
       <div class="bloc-missions-entete">
         <h2>Prospects en cours</h2>
@@ -57,7 +63,7 @@ header {
 
 .bloc-missions {
   margin-bottom: 55px;
-  
+
   .bloc-missions-entete {
     display: flex;
     flex-flow: row wrap;
@@ -70,7 +76,7 @@ header {
       margin-right: 40px;
     }
     .separateur {
-      content: '';
+      content: "";
       display: block;
       flex: 1;
       height: 1px;

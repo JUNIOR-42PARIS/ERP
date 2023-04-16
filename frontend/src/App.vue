@@ -1,18 +1,25 @@
-
 <template>
   <Toaster></Toaster>
   <FormComponent></FormComponent>
 
   <nav v-if="!!userStore.user">
-    <img src="./assets/logo.png" alt="Logo" id="navbar-logo">
-    <RouterLink :to="{ name: 'index' }" exact-active-class="active">Accueil</RouterLink>
-    <RouterLink :to="{ name: 'missions' }" active-class="active">Missions</RouterLink>
+    <img src="./assets/logo.png" alt="Logo" id="navbar-logo" />
+    <RouterLink :to="{ name: 'index' }" exact-active-class="active"
+      >Accueil</RouterLink
+    >
+    <RouterLink :to="{ name: 'missions' }" active-class="active"
+      >Missions</RouterLink
+    >
     <RouterLink to="/reunions" active-class="active">Réunions</RouterLink>
     <RouterLink to="/ressources-humaines" active-class="active">RH</RouterLink>
     <NavbarNotification id="notification" />
     <div id="user">
       <button @click="toggleUserDropdown">
-        <img :src="userStore.user.user_metadata.picture" alt="Avatar" referrerpolicy="no-referrer">
+        <img
+          :src="userStore.user.user_metadata.picture"
+          alt="Avatar"
+          referrerpolicy="no-referrer"
+        />
         {{ userStore.user.user_metadata.name }}
         <CarretIcon :height="19" :rotation="getUserDropdownCarretRotation" />
       </button>
@@ -24,24 +31,22 @@
 
   <Suspense>
     <RouterView />
-    <template #fallback>
-      Loading
-    </template>
+    <template #fallback> Loading </template>
   </Suspense>
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router';
-import { computed, onMounted, ref, type Ref } from 'vue';
+import { RouterLink, RouterView } from "vue-router";
+import { computed, onMounted, ref, type Ref } from "vue";
 
-import router from '@/router';
-import { supabase, useUserStore } from '@/stores/supabase';
+import router from "@/router";
+import { supabase, useUserStore } from "@/stores/supabase";
 
-import FormComponent from '@/components/form/FormComponent.vue';
-import NavbarNotification from '@/components/navbar/NavbarNotification.vue';
-import CarretIcon from '@/components/shared/icons/CarretIcon.vue';
-import Toaster from '@/components/shared/ToasterList.vue';
-import RotationType from '@/types/rotation';
+import FormComponent from "@/components/form/FormComponent.vue";
+import NavbarNotification from "@/components/navbar/NavbarNotification.vue";
+import CarretIcon from "@/components/shared/icons/CarretIcon.vue";
+import Toaster from "@/components/shared/ToasterList.vue";
+import RotationType from "@/types/rotation";
 
 const showUserDropdown: Ref<boolean> = ref(false);
 const userStore = useUserStore();
@@ -86,7 +91,8 @@ nav {
   align-items: stretch;
   justify-content: flex-start;
 
-  a, button {
+  a,
+  button {
     font-family: "Roboto", sans-serif;
     border: 0;
     line-height: 80px;
@@ -116,7 +122,8 @@ nav {
     position: relative;
     margin-right: 67px;
 
-    img, svg {
+    img,
+    svg {
       vertical-align: middle;
     }
 

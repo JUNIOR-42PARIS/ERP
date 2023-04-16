@@ -12,8 +12,8 @@ jobs:
           version: 6
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
-          cache: 'pnpm'
+          node-version: "16"
+          cache: "pnpm"
           cache-dependency-path: |
             pnpm-lock.yaml
 

@@ -10,7 +10,9 @@ export enum ToastType {
 
 export const useToasterStore = defineStore("toaster", () => {
   let id = 1;
-  const toasts: Ref<{ id: number; content: string; type: ToastType, interval: NodeJS.Timer }[]> = ref([]);
+  const toasts: Ref<
+    { id: number; content: string; type: ToastType; interval: NodeJS.Timer }[]
+  > = ref([]);
 
   function addToast(content: string, type: ToastType): void {
     const currentID = id;
@@ -21,7 +23,7 @@ export const useToasterStore = defineStore("toaster", () => {
       id: currentID,
       content,
       type,
-      interval
+      interval,
     });
     id++;
   }

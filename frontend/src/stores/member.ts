@@ -6,7 +6,10 @@ import { supabase } from "./supabase";
 import type { PostgrestError } from "@supabase/supabase-js";
 
 export const useMemberStore = defineStore("member", () => {
-  const members: Ref<Result<Database['public']['Tables']['users_informations']['Row'][], PostgrestError> | null> = ref(null);
+  const members: Ref<Result<
+    Database["public"]["Tables"]["users_informations"]["Row"][],
+    PostgrestError
+  > | null> = ref(null);
 
   const fetchMembers = async () => {
     members.value = null;

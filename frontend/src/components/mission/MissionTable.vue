@@ -4,40 +4,93 @@
       <tr>
         <th class="left">
           <div class="sort">
-            <CarretIcon class="carret" color="white" :height="12" :rotation="RotationType.top" />
-            <CarretIcon class="carret" color="white" :height="12" :rotation="RotationType.bottom" />
+            <CarretIcon
+              class="carret"
+              color="white"
+              :height="12"
+              :rotation="RotationType.top"
+            />
+            <CarretIcon
+              class="carret"
+              color="white"
+              :height="12"
+              :rotation="RotationType.bottom"
+            />
           </div>
           Nom de la mission
         </th>
         <th class="left">
           <div class="sort">
-            <CarretIcon class="carret" color="white" :height="12" :rotation="RotationType.top" />
-            <CarretIcon class="carret" color="white" :height="12" :rotation="RotationType.bottom" />
+            <CarretIcon
+              class="carret"
+              color="white"
+              :height="12"
+              :rotation="RotationType.top"
+            />
+            <CarretIcon
+              class="carret"
+              color="white"
+              :height="12"
+              :rotation="RotationType.bottom"
+            />
           </div>
           Chef de projet
         </th>
         <th class="right">
           Dernière mise à jour
           <div class="sort">
-            <CarretIcon class="carret" color="white" :height="12" :rotation="RotationType.top" />
-            <CarretIcon class="carret" color="white" :height="12" :rotation="RotationType.bottom" />
+            <CarretIcon
+              class="carret"
+              color="white"
+              :height="12"
+              :rotation="RotationType.top"
+            />
+            <CarretIcon
+              class="carret"
+              color="white"
+              :height="12"
+              :rotation="RotationType.bottom"
+            />
           </div>
         </th>
         <th class="right">
           Date de création
           <div class="sort">
-            <CarretIcon class="carret" color="white" :height="12" :rotation="RotationType.top" />
-            <CarretIcon class="carret" color="white" :height="12" :rotation="RotationType.bottom" />
+            <CarretIcon
+              class="carret"
+              color="white"
+              :height="12"
+              :rotation="RotationType.top"
+            />
+            <CarretIcon
+              class="carret"
+              color="white"
+              :height="12"
+              :rotation="RotationType.bottom"
+            />
           </div>
         </th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="mission of missions" :key="mission.id">
-        <td><RouterLink class="lien-mission" :to="{ name: 'missions-index', params: { idMission: mission.nom } }">#{{ mission.nom }}</RouterLink></td> <!-- @TODO -->
-        <td><RouterLink to="/profile/cdp1">@cdp1</RouterLink></td> <!-- @TODO -->
-        <td class="date">{{ new Date(mission.created_at).toLocaleDateString('fr-FR') }}</td> <!-- @TODO -->
-        <td class="date">{{ new Date(mission.created_at).toLocaleDateString('fr-FR') }}</td>
+        <td>
+          <RouterLink
+            class="lien-mission"
+            :to="{ name: 'missions-index', params: { idMission: mission.nom } }"
+            >#{{ mission.nom }}</RouterLink
+          >
+        </td>
+        <!-- @TODO -->
+        <td><RouterLink to="/profile/cdp1">@cdp1</RouterLink></td>
+        <!-- @TODO -->
+        <td class="date">
+          {{ new Date(mission.created_at).toLocaleDateString("fr-FR") }}
+        </td>
+        <!-- @TODO -->
+        <td class="date">
+          {{ new Date(mission.created_at).toLocaleDateString("fr-FR") }}
+        </td>
       </tr>
       <tr v-if="missions.length === 0">
         <td colspan="4" class="empty">Aucune mission à afficher</td>
@@ -61,15 +114,16 @@ const props = defineProps({
     validator(value: string) {
       return Object.keys(MissionStatus).includes(value);
     },
-  }
+  },
 });
 
 const missionStore = useMissionStore();
 
 const missions = computed(() => {
-  if (!missionStore.missions)
-    return [];
-  return missionStore.missions?.filter((mission) => mission.status === props.type);
+  if (!missionStore.missions) return [];
+  return missionStore.missions?.filter(
+    (mission) => mission.status === props.type
+  );
 });
 </script>
 
@@ -90,7 +144,7 @@ table {
     background-color: $light-primary;
     color: $text-white;
     font-weight: 600;
-    
+
     th {
       padding-top: 18px;
       padding-bottom: 18px;
@@ -156,7 +210,7 @@ table {
           text-align: right;
           color: $text-grey;
         }
-        
+
         &.empty {
           text-align: center;
           color: $text-grey;
@@ -167,7 +221,7 @@ table {
         content: "";
         height: 1px;
         width: 85%;
-        background-color: #F4F4F4;
+        background-color: #f4f4f4;
         display: block;
         position: absolute;
         bottom: 0;

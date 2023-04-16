@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { useFormStore } from '@/stores/form';
+import { useFormStore } from "@/stores/form";
 
 const formStore = useFormStore();
 </script>
@@ -22,20 +22,20 @@ const formStore = useFormStore();
 @import "@/assets/variables.scss";
 
 .slide-form-enter-active {
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
   #form-flou,
   #form-side-panel {
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
   }
 }
 
 .slide-form-leave-active {
-  transition: all .2s ease-in;
+  transition: all 0.2s ease-in;
 
   #form-flou,
   #form-side-panel {
-    transition: all .2s ease-in;
+    transition: all 0.2s ease-in;
   }
 }
 
@@ -60,7 +60,7 @@ const formStore = useFormStore();
     background: $bg-white;
     z-index: 100;
 
-    >header {
+    > header {
       height: 80px;
       background-color: $primary;
 
@@ -74,7 +74,7 @@ const formStore = useFormStore();
   }
 
   #form-flou {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 0;
