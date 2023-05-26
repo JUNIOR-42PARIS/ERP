@@ -8,7 +8,7 @@
     <RouterLink :to="{ name: 'index' }" exact-active-class="active">Accueil</RouterLink>
     <RouterLink :to="{ name: 'missions' }" active-class="active">Missions</RouterLink>
     <RouterLink to="/reunions" active-class="active">Réunions</RouterLink>
-    <RouterLink to="/ressources-humaines" active-class="active">RH</RouterLink>
+    <RouterLink to="/ressources-humaines" active-class="active" v-if="userStore.isMember">RH</RouterLink>
     <NavbarNotification id="notification" />
     <div id="user">
       <button @click="toggleUserDropdown">

@@ -10,7 +10,8 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseKey);
 
 export const useUserStore = defineStore('user', () => {
   const user: Ref<undefined | User> = ref(undefined);
-  const is_admin: Ref<boolean> = ref(false);
+  const isAdmin: Ref<boolean> = ref(false);
+  const isMember: Ref<boolean> = ref(false);
 
   async function setUser(new_user: User) {
     user.value = new_user;
@@ -18,14 +19,20 @@ export const useUserStore = defineStore('user', () => {
     const { data: data_is_admin } = await supabase.rpc('is_user_admin', {
       user_id: new_user.id
     });
-    is_admin.value = data_is_admin === true;
+    isAdmin.value = data_is_admin === true;
+
+    const { data: data_is_member } = await supabase
+      .rpc('is_user_member', {
+        user_id: new_user.id
+      });
+    isMember.value = data_is_member === true;
   }
 
   async function logout() {
     user.value = undefined;
-    is_admin.value = false;
+    isAdmin.value = false;
     await supabase.auth.signOut();
   }
 
-  return { user, is_admin, setUser, logout };
+  return { user, isAdmin, isMember, setUser, logout };
 });

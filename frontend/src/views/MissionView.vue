@@ -2,7 +2,7 @@
   <div class="container">
     <header>
       <h1>Missions</h1>
-      <button v-if="userStore.is_admin" @click="() => formStore.showMissionCreate()" class="btn">Nouvelle mission</button>
+      <button v-if="userStore.isAdmin" @click="() => formStore.showMissionCreate()" class="btn">Nouvelle mission</button>
     </header>
 
     <div class="bloc-missions">
