@@ -11,10 +11,15 @@
 
 <script lang="ts" setup>
 import RessourceHumaineMembreCard from '@/components/ressource-humaine/RessourceHumaineMembreCard.vue';
-import { useMemberStore } from "@/stores/member";
+import { useMemberStore, type Member } from "@/stores/member";
+import { computed } from 'vue';
 
 const memberStore = useMemberStore();
-const memberList = await memberStore.fetchMembers();
+await memberStore.fetchMembers();
+
+const memberList = computed((): Member[] => {
+  return memberStore.members;
+});
 </script>
 
 <style lang="scss" scoped>

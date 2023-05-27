@@ -43,7 +43,7 @@ function editMember() {
   if (!canUserEditMember.value) {
     return;
   }
-  memberStore.editMember = props.member;
+  memberStore.editingMember = props.member;
   formStore.showMemberEdit();
 }
 </script>

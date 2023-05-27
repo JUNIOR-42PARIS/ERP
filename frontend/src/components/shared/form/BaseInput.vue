@@ -10,23 +10,15 @@
 
 <script setup lang="ts">
 import type { ValidationReturnType } from "@/utils/validation";
-import { computed, type Component } from "vue";
+import type { Component } from "vue";
 
 const props = defineProps<{
   icon?: Component,
   label: string,
   name: string,
-  modelValue?: string,
   required?: boolean,
-  validation?: (value: string) => ValidationReturnType
+  error: ValidationReturnType,
 }>();
-
-const error = computed(() => {
-  if (props.validation && props.validation(props.modelValue ?? "") !== true) {
-    return props.validation(props.modelValue ?? "");
-  }
-  return "";
-});
 </script>
 
 <style lang="scss" scoped>

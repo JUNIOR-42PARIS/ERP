@@ -1,5 +1,5 @@
 <template>
-  <BaseInput :name="props.name" :icon="props.icon" :label="props.label" :modelValue="props.modelValue" :required="props.required" :validation="props.validation">
+  <BaseInput :name="props.name" :icon="props.icon" :label="props.label" :modelValue="props.modelValue" :required="props.required" :error="error">
     <input type="text" :id="props.name" :name="props.name" v-model="value" :placeholder="props.label.toLowerCase()" :required="props.required === true">
   </BaseInput>
 </template>
@@ -17,9 +17,9 @@ const props = defineProps<{
   required?: boolean,
   validation?: (value: string) => ValidationReturnType,
 }>();
-const emit = defineEmits(['update:modelValue']);
+const emits = defineEmits(['update:modelValue']);
 
-const error = computed(() => {
+const error = computed((): ValidationReturnType => {
   if (props.validation && props.validation(props.modelValue ?? "") !== true) {
     return props.validation(props.modelValue ?? "");
   }
@@ -31,7 +31,7 @@ const value = computed({
     return props.modelValue;
   },
   set(value) {
-    emit("update:modelValue", value);
+    emits("update:modelValue", value);
   }
 });
 </script>

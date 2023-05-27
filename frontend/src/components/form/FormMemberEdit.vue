@@ -1,5 +1,5 @@
 <template>
-  <div v-if="memberEditing">
+  <form v-if="memberEditing" @submit.prevent="editMember">
     <div class="form-container">
       <div class="form-row">
         <TextInput :icon="UserIcon" name="name" label="Prénom Nom" v-model="memberEditing.name" :validation="isNameTextLengthValid()" :required="true" />
@@ -18,9 +18,9 @@
 
     <div class="form-footer">
       <button class="btn grey" @click="() => emits('close')">Annuler</button>
-      <button type="submit" class="btn">Créer</button>
+      <button type="submit" class="btn">Modifier</button>
     </div>
-  </div>
+  </form>
 </template>
 
 <script lang="ts" setup>
@@ -43,7 +43,7 @@ const roleStore = useRoleStore();
 
 await roleStore.fetchRoles();
 
-const memberEditing = ref<Member | null>(Object.assign({}, memberStore.editMember));
+const memberEditing = ref<Member | null>(Object.assign({}, memberStore.editingMember));
 
 const roleList = computed((): Role[] => {
   return roleStore.roles;
@@ -51,6 +51,20 @@ const roleList = computed((): Role[] => {
 const roleNameList = computed((): string[] => {
   return roleList.value.map((role) => role.name);
 });
+
+async function editMember() {
+  if (memberEditing.value) {
+    await memberStore.editMember(memberEditing.value.id_user, {
+      name: memberEditing.value.name,
+      role: memberEditing.value.role,
+      phone: memberEditing.value.phone,
+      email: memberEditing.value.email,
+    });
+    await memberStore.fetchMembers();
+    emits("close");
+    return;
+  }
+}
 </script>
 
 <style lang="scss" scoped>
