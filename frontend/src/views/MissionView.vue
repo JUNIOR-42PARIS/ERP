@@ -42,18 +42,7 @@ onMounted(async () => {
 
 <style lang="scss" scoped>
 @import "@/assets/variables.scss";
-
-header {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
-
-  h1 {
-    font-size: 24px;
-  }
-}
+@import "@/assets/views.scss";
 
 .bloc-missions {
   margin-bottom: 55px;

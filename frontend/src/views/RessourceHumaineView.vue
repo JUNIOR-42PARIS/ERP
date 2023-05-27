@@ -1,7 +1,12 @@
 <template>
   <Suspense>
-    <div class="container grid-rh">
-      <RessourceHumaineMembreCard v-for="member of memberList" :key="member.id_user" :member="member" />
+    <div class="container">
+      <header>
+        <h1>Missions</h1>
+      </header>
+      <div class="grid-rh">
+        <RessourceHumaineMembreCard v-for="member of memberList" :key="member.id_user" :member="member" />
+      </div>
     </div>
     <template #fallback>
       Loading...
@@ -23,6 +28,8 @@ const memberList = computed((): Member[] => {
 </script>
 
 <style lang="scss" scoped>
+@import "@/assets/views.scss";
+
 .grid-rh {
   display: flex;
   flex-flow: row wrap;
