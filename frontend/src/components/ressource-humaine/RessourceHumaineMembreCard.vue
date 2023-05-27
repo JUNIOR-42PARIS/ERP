@@ -1,15 +1,20 @@
 <template>
   <div class="card-rh-member">
-    <div class="card-content">
-      {{ props.member.name }}
+    <div class="card-rh-member-content">
+      <div class="card-rh-member-content-header">
+        {{ props.member.name }}
+
+        <font-awesome-icon :icon="['fas', 'gear']" class="card-rh-member-content-header-gear" v-if="canUserEditMember" @click="editMember" />
+      </div>
     </div>
-    <div class="card-footer">
+    <div class="card-rh-member-footer">
       <p>{{ props.member.role }}</p>
+
       <a :href="`mailto:${props.member.email}`" class="icon-spacing">
         <font-awesome-icon :icon="['far', 'envelope']" />
       </a>
 
-      <a :href="`tel:${props.member.email}`">
+      <a :href="`tel:${props.member.phone}`" v-if="props.member.phone">
         <font-awesome-icon :icon="['fas', 'mobile-screen']" />
       </a>
     </div>
@@ -17,11 +22,30 @@
 </template>
 
 <script lang="ts" setup>
-import type { Member } from "@/stores/member";
+import { useFormStore } from "@/stores/form";
+import { useMemberStore, type Member } from "@/stores/member";
+import { useUserStore } from "@/stores/supabase";
+import { computed } from "vue";
 
 const props = defineProps<{
   member: Member
 }>();
+
+const userStore = useUserStore();
+const formStore = useFormStore();
+const memberStore = useMemberStore();
+
+const canUserEditMember = computed((): boolean => {
+  return userStore.isAdmin === true;
+});
+
+function editMember() {
+  if (!canUserEditMember.value) {
+    return;
+  }
+  memberStore.editMember = props.member;
+  formStore.showMemberEdit();
+}
 </script>
 
 <style lang="scss" scoped>
@@ -32,13 +56,25 @@ const props = defineProps<{
   height: 8rem;
   aspect-ratio: 19/9;
 
-  .card-content {
+  &-content {
     height: 80%;
     padding: 10px;
     box-sizing: border-box;
+    
+    &-header {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: space-between;
+
+      &-gear {
+        color: $element-grey;
+        cursor: pointer;
+      }
+    }
   }
 
-  .card-footer {
+  &-footer {
     background: $background-grey2;
     height: 20%;
     font-size: 0.8rem;

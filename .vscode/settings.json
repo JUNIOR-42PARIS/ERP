@@ -1,5 +1,4 @@
 {
     "editor.tabSize": 2,
-    "typescript.format.semicolons": "insert",
-    "ansible.python.interpreterPath": "/bin/python3"
+    "typescript.format.semicolons": "insert"
 }

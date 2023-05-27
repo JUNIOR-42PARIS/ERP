@@ -1,7 +1,7 @@
 <template>
   <Suspense>
-    <div v-for="member of memberList" class="container grid-rh" :key="member.id_user">
-      <RessourceHumaineMembreCard :member="member" />
+    <div class="container grid-rh">
+      <RessourceHumaineMembreCard v-for="member of memberList" :key="member.id_user" :member="member" />
     </div>
     <template #fallback>
       Loading...
@@ -23,5 +23,6 @@ const memberList = await memberStore.fetchMembers();
   flex-flow: row wrap;
   justify-content: flex-start;
   align-items: flex-start;
+  gap: 16px;
 }
 </style>

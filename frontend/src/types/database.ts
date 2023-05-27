@@ -172,6 +172,12 @@ export interface Database {
         }
         Returns: boolean
       }
+      is_user_member: {
+        Args: {
+          user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
       mission_status: "prospect" | "mission" | "abandonnee" | "finie"
