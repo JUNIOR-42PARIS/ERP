@@ -8,7 +8,15 @@ export default mergeConfig(
   defineConfig({
     test: {
       environment: 'jsdom',
-      root: fileURLToPath(new URL('./test/', import.meta.url))
+      root: fileURLToPath(new URL('./test/', import.meta.url)),
+      setupFiles: [
+        "setup.ts"
+      ]
+    },
+    resolve: {
+      alias: {
+        '#': fileURLToPath(new URL('./test', import.meta.url))
+      }
     }
   })
 );

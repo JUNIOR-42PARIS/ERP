@@ -7,24 +7,7 @@
           <div id="header-details-subtitle">
             Chef de projet
 
-            <template v-if="!isEditingCdp">
-              <RouterLink v-if="cdp !== null" to="/membre/user1" class="resource-link">{{
-                cdp.name
-              }}</RouterLink>
-              <span class="no-cdp" v-else>Aucun</span>
-
-              <font-awesome-icon :icon="['far', 'pen-to-square']" @click="toggleEditionCdp" />
-            </template>
-            <template v-else>
-              <Multiselect
-                :options="memberList"
-                label="name"
-                track-by="id_user"
-                v-model="idNewCDP"
-                width="100px"
-                @close="editCdp"
-              />
-            </template>
+            <MissionChefDeProjetSelect :mission="mission" @edit-cdp="editCdp" />
           </div>
         </div>
         <button class="btn">+ Ajouter un BC</button>
@@ -56,58 +39,21 @@
 </template>
 
 <script lang="ts" setup>
-import { useMemberStore, type Member } from '@/stores/member';
-import { useMissionStore, IntervenantType } from '@/stores/mission';
-import { computed, ref } from 'vue';
-import Multiselect from 'vue-multiselect';
+import MissionChefDeProjetSelect from '@/components/mission/MissionChefDeProjetSelect.vue';
+import { useMissionStore } from '@/stores/mission';
+import { computed } from 'vue';
 
 const missionStore = useMissionStore();
-const memberStore = useMemberStore();
 
 await missionStore.fetchMissionFromUrl();
-
-const isEditingCdp = ref<boolean>(false);
-const idNewCDP = ref<Member | null>(null);
 
 const mission = computed(() => {
   return missionStore.mission;
 });
 
-const memberList = computed((): Member[] => {
-  return memberStore.memberList;
-});
-
-const cdp = computed(() => {
-  if (!mission.value) return null;
-  const cdpList = mission.value.members_type.filter(
-    (member) => member.type === IntervenantType.CDP
-  );
-  if (cdpList.length === 0) return null;
-  return cdpList[0].member;
-});
-
-async function toggleEditionCdp() {
-  await memberStore.fetchMemberCdpOrAdminList();
-
-  if (cdp.value) {
-    idNewCDP.value = cdp.value;
-  }
-
-  isEditingCdp.value = !isEditingCdp.value;
-}
-
-async function editCdp() {
+async function editCdp(payload: { idOldCdp: string | null; idNewCdp: string | null }) {
   if (mission.value) {
-    try {
-      await missionStore.editCdpForMission(
-        mission.value.id,
-        cdp.value?.id_user ?? null,
-        idNewCDP.value?.id_user ?? null
-      );
-    } catch (e) {
-      console.error(e);
-    }
-    isEditingCdp.value = false;
+    await missionStore.editCdpForMission(mission.value.id, payload.idOldCdp, payload.idNewCdp);
   }
 }
 </script>
