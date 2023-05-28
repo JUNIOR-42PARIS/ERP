@@ -2,17 +2,43 @@
   <form v-if="memberEditing" @submit.prevent="editMember">
     <div class="form-container">
       <div class="form-row">
-        <TextInput :icon="UserIcon" name="name" label="Prénom Nom" v-model="memberEditing.name" :validation="isNameTextLengthValid()" :required="true" />
+        <TextInput
+          :icon="UserIcon"
+          name="name"
+          label="Prénom Nom"
+          v-model="memberEditing.name"
+          :validation="isNameTextLengthValid()"
+          :required="true"
+        />
       </div>
       <div class="form-row">
-        <SelectInput label="Role" name="role" :options="roleNameList" :searchable="true" :show-labels="false" v-model="memberEditing.role" />
+        <SelectInput
+          label="Role"
+          name="role"
+          :options="roleNameList"
+          :searchable="true"
+          :show-labels="false"
+          v-model="memberEditing.role"
+        />
       </div>
-      
+
       <div class="form-row">
-        <TextInput :icon="EmailIcon" name="mission_email_intermediaire" label="Email de l'intermédiaire" v-model="memberEditing.email" :validation="isNameTextLengthValid()"/>
+        <TextInput
+          :icon="EmailIcon"
+          name="mission_email_intermediaire"
+          label="Email de l'intermédiaire"
+          v-model="memberEditing.email"
+          :validation="isNameTextLengthValid()"
+        />
       </div>
       <div class="form-row">
-        <TextInput :icon="PhoneIcon" name="mission_telephone_intermediaire" label="Téléphone de l'intermédiaire" v-model="memberEditing.phone" :validation="isNameTextLengthValid(0, 10)"/>
+        <TextInput
+          :icon="PhoneIcon"
+          name="mission_telephone_intermediaire"
+          label="Téléphone de l'intermédiaire"
+          v-model="memberEditing.phone"
+          :validation="isNameTextLengthValid(0, 10)"
+        />
       </div>
     </div>
 
@@ -35,7 +61,7 @@ import { isNameTextLengthValid } from '@/utils/validation';
 import SelectInput from '../shared/form/SelectInput.vue';
 
 const emits = defineEmits<{
-  (e: 'close'): void
+  (e: 'close'): void;
 }>();
 
 const memberStore = useMemberStore();
@@ -58,10 +84,10 @@ async function editMember() {
       name: memberEditing.value.name,
       role: memberEditing.value.role,
       phone: memberEditing.value.phone,
-      email: memberEditing.value.email,
+      email: memberEditing.value.email
     });
     await memberStore.fetchMembers();
-    emits("close");
+    emits('close');
     return;
   }
 }

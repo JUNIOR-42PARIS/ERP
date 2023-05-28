@@ -1,28 +1,39 @@
 <template>
-  <label :style="{fontStyle: props.required !== true ? 'italic' : ''}" :class="{ 'error': error }" :for="props.name">{{ props.label }}</label>
-  <div class="input" :class="{'error': error }" v-if="props.icon">
-    <component :is="props.icon" class="icon" :width="20" :height="20" :color="error ? '#B41F1F' : '#A3A3A3'" />
+  <label
+    :style="{ fontStyle: props.required !== true ? 'italic' : '' }"
+    :class="{ error: error }"
+    :for="props.name"
+    >{{ props.label }}</label
+  >
+  <div class="input" :class="{ error: error }" v-if="props.icon">
+    <component
+      :is="props.icon"
+      class="icon"
+      :width="20"
+      :height="20"
+      :color="error ? '#B41F1F' : '#A3A3A3'"
+    />
     <slot></slot>
   </div>
-  <slot v-else :class="{'input': true, 'error': error }"></slot>
+  <slot v-else :class="{ input: true, error: error }"></slot>
   <span class="error-text">{{ error ?? '' }}</span>
 </template>
 
 <script setup lang="ts">
-import type { ValidationReturnType } from "@/utils/validation";
-import type { Component } from "vue";
+import type { ValidationReturnType } from '@/utils/validation';
+import type { Component } from 'vue';
 
 const props = defineProps<{
-  icon?: Component,
-  label: string,
-  name: string,
-  required?: boolean,
-  error: ValidationReturnType,
+  icon?: Component;
+  label: string;
+  name: string;
+  required?: boolean;
+  error: ValidationReturnType;
 }>();
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/variables.scss";
+@import '@/assets/variables.scss';
 
 label {
   display: block;
@@ -54,7 +65,7 @@ label {
     flex: 1;
     border: 0;
     font-size: 14px;
-    font-family: "Inter";
+    font-family: 'Inter';
 
     &:focus {
       outline: none;

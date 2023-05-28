@@ -1,29 +1,43 @@
 <template>
-  <BaseInput :name="props.name" :icon="props.icon" :label="props.label" :modelValue="props.modelValue" :required="props.required" :error="error">
-    <input type="text" :id="props.name" :name="props.name" v-model="value" :placeholder="props.label.toLowerCase()" :required="props.required === true">
+  <BaseInput
+    :name="props.name"
+    :icon="props.icon"
+    :label="props.label"
+    :modelValue="props.modelValue"
+    :required="props.required"
+    :error="error"
+  >
+    <input
+      type="text"
+      :id="props.name"
+      :name="props.name"
+      v-model="value"
+      :placeholder="props.label.toLowerCase()"
+      :required="props.required === true"
+    />
   </BaseInput>
 </template>
 
 <script setup lang="ts">
-import type { ValidationReturnType } from "@/utils/validation";
-import { computed, type Component } from "vue";
-import BaseInput from "./BaseInput.vue";
+import type { ValidationReturnType } from '@/utils/validation';
+import { computed, type Component } from 'vue';
+import BaseInput from './BaseInput.vue';
 
 const props = defineProps<{
-  icon: Component,
-  label: string,
-  name: string,
-  modelValue?: string,
-  required?: boolean,
-  validation?: (value: string) => ValidationReturnType,
+  icon: Component;
+  label: string;
+  name: string;
+  modelValue?: string;
+  required?: boolean;
+  validation?: (value: string) => ValidationReturnType;
 }>();
 const emits = defineEmits(['update:modelValue']);
 
 const error = computed((): ValidationReturnType => {
-  if (props.validation && props.validation(props.modelValue ?? "") !== true) {
-    return props.validation(props.modelValue ?? "");
+  if (props.validation && props.validation(props.modelValue ?? '') !== true) {
+    return props.validation(props.modelValue ?? '');
   }
-  return "";
+  return '';
 });
 
 const value = computed({
@@ -31,13 +45,13 @@ const value = computed({
     return props.modelValue;
   },
   set(value) {
-    emits("update:modelValue", value);
+    emits('update:modelValue', value);
   }
 });
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/variables.scss";
+@import '@/assets/variables.scss';
 
 label {
   display: block;
@@ -69,7 +83,7 @@ label {
     flex: 1;
     border: 0;
     font-size: 14px;
-    font-family: "Inter";
+    font-family: 'Inter';
 
     &:focus {
       outline: none;

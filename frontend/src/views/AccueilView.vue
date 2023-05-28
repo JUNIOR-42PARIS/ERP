@@ -12,15 +12,26 @@
 
           <div class="carte-element-liste">
             <div class="ligne-importante">
-              <p>Bienvenue à <RouterLink to="/membre/cdp2" class="resource-link">@cdp2</RouterLink> qui rejoint les CDP</p>
+              <p>
+                Bienvenue à
+                <RouterLink to="/membre/cdp2" class="resource-link">@cdp2</RouterLink> qui rejoint
+                les CDP
+              </p>
               <span class="date">21/02/2023</span>
             </div>
             <div class="ligne-importante">
-              <p>Nouveau prospect <RouterLink to="/mission/mission-01" class="resource-link">#mission-01</RouterLink></p>
+              <p>
+                Nouveau prospect
+                <RouterLink to="/mission/mission-01" class="resource-link">#mission-01</RouterLink>
+              </p>
               <span class="date">21/02/2023</span>
             </div>
             <div class="ligne-importante">
-              <p>Prospect converti en client <RouterLink to="/mission/mission-02" class="resource-link">#mission-02</RouterLink> 🎉</p>
+              <p>
+                Prospect converti en client
+                <RouterLink to="/mission/mission-02" class="resource-link">#mission-02</RouterLink>
+                🎉
+              </p>
               <span class="date">21/02/2023</span>
             </div>
           </div>
@@ -56,31 +67,32 @@ import { supabase } from '@/stores/supabase';
 
 async function test() {
   await supabase.functions.invoke('Notify', {
-    body: JSON.stringify({ name: 'Functions' }),
+    body: JSON.stringify({ name: 'Functions' })
   });
 }
 test();
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/variables.scss";
+@import '@/assets/variables.scss';
 
-.grid-col, .grid-row {
+.grid-col,
+.grid-row {
   display: flex;
   flex-wrap: nowrap;
   gap: 22px;
-  
+
   &.grid-col {
     width: 100%;
 
     flex-direction: row;
     justify-content: stretch;
-    
+
     > * {
       width: 50%;
     }
   }
-  
+
   &.grid-row {
     flex-direction: column;
     justify-content: flex-start;
@@ -101,7 +113,7 @@ test();
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
-    font-family: "Roboto";
+    font-family: 'Roboto';
   }
 }
 
@@ -127,7 +139,9 @@ test();
 
       margin-bottom: 10px;
 
-      p, span, a {
+      p,
+      span,
+      a {
         font-size: 14px;
         font-weight: 400;
       }
