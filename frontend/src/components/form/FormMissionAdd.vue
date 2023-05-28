@@ -125,7 +125,6 @@ import { computed, onMounted, ref, type Ref } from 'vue';
 import type { Database } from '@/types/database';
 import MissionStatus from '@/types/missionStatus';
 import Multiselect from 'vue-multiselect';
-import 'vue-multiselect/dist/vue-multiselect.css';
 import { useMissionStore } from '@/stores/mission';
 import { isNameTextLengthValid, isValidSiren } from '@/utils/validation';
 import { ToastType, useToasterStore } from '@/stores/toaster';

@@ -77,3 +77,9 @@ async function editCdp() {
   isEditingCdp.value = false;
 }
 </script>
+
+<style lang="scss" scoped>
+svg {
+  cursor: pointer;
+}
+</style>

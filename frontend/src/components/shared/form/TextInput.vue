@@ -23,15 +23,19 @@ import type { ValidationReturnType } from '@/utils/validation';
 import { computed, type Component } from 'vue';
 import BaseInput from './BaseInput.vue';
 
+type ModelValue = string | null | undefined;
+
 const props = defineProps<{
   icon: Component;
   label: string;
   name: string;
-  modelValue?: string;
+  modelValue: ModelValue;
   required?: boolean;
   validation?: (value: string) => ValidationReturnType;
 }>();
-const emits = defineEmits(['update:modelValue']);
+const emits = defineEmits<{
+  (e: 'update:modelValue', value: ModelValue): void;
+}>();
 
 const error = computed((): ValidationReturnType => {
   if (props.validation && props.validation(props.modelValue ?? '') !== true) {

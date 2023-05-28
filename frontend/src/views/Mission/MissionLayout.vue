@@ -96,10 +96,6 @@ header {
 
       color: $text-white;
       font-size: 20px;
-
-      svg {
-        cursor: pointer;
-      }
     }
   }
 }

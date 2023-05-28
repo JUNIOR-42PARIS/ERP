@@ -35,8 +35,8 @@ importers:
         specifier: ^3.3.4
         version: 3.3.4
       vue-multiselect:
-        specifier: 2.1.7
-        version: 2.1.7
+        specifier: next
+        version: 3.0.0-beta.2
       vue-router:
         specifier: ^4.2.1
         version: 4.2.1(vue@3.3.4)
@@ -3567,8 +3567,8 @@ packages:
       - supports-color
     dev: true
 
-  /vue-multiselect@2.1.7:
-    resolution: {integrity: sha512-KIegcN+Ntwg3cbkY/jhw2s/+XJUM0Lpi/LcKFYCS8PrZHcWBl2iKCVze7ZCnRj3w8H7/lUJ9v7rj9KQiNxApBw==}
+  /vue-multiselect@3.0.0-beta.2:
+    resolution: {integrity: sha512-TFVHtI/KdWoD3Opzbkso8OIqkZlZEqFF7f2jlYx1ttgC4Jv/48IGlU5zn6cBR4p2bFDFGCHF5SkLCaadLhnBPQ==}
     engines: {node: '>= 4.0.0', npm: '>= 3.0.0'}
     dev: false
 

@@ -44,9 +44,9 @@
         <!-- @TODO -->
         <td><RouterLink to="/profile/cdp1">@cdp1</RouterLink></td>
         <!-- @TODO -->
-        <td class="date">{{ new Date(mission.created_at).toLocaleDateString('fr-FR') }}</td>
+        <td class="date">{{ new Date(mission.created_at ?? '').toLocaleDateString('fr-FR') }}</td>
         <!-- @TODO -->
-        <td class="date">{{ new Date(mission.created_at).toLocaleDateString('fr-FR') }}</td>
+        <td class="date">{{ new Date(mission.created_at ?? '').toLocaleDateString('fr-FR') }}</td>
       </tr>
       <tr v-if="missions.length === 0">
         <td colspan="4" class="empty">Aucune mission à afficher</td>
