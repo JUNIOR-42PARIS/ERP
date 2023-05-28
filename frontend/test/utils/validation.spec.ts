@@ -21,7 +21,7 @@ describe("isValidSiren", () => {
 });
 
 describe("isNameTextLengthValid", () => {
-  const maxLengthString = '01234567890123456789012345678901234567890123456789';
+  const maxLengthString = '012345678901234567890123456789012345678901234567890';
 
   it("should be true", () => {
     expect(isNameTextLengthValid()('A')).toBe(true);
@@ -40,6 +40,6 @@ describe("isNameTextLengthValid", () => {
   it("should hit maximum", () => {
     expect(isNameTextLengthValid()(maxLengthString)).toBe('Le texte est trop long (au max. 50 caractères)');
     expect(isNameTextLengthValid(10, 50)(maxLengthString)).toBe('Le texte est trop long (au max. 50 caractères)');
-    expect(isNameTextLengthValid(1, 2)('   01   ')).toBe('Le texte est trop long (au max. 2 caractères)');
+    expect(isNameTextLengthValid(1, 2)('   012   ')).toBe('Le texte est trop long (au max. 2 caractères)');
   });
 });

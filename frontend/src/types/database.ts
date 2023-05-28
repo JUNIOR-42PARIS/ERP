@@ -140,16 +140,25 @@ export interface Database {
       }
       users_informations: {
         Row: {
-          role: string
-          user: string
+          email: string
+          id_user: string
+          name: string
+          phone: string
+          role: string | null
         }
         Insert: {
-          role: string
-          user: string
+          email?: string
+          id_user: string
+          name?: string
+          phone?: string
+          role?: string | null
         }
         Update: {
-          role?: string
-          user?: string
+          email?: string
+          id_user?: string
+          name?: string
+          phone?: string
+          role?: string | null
         }
       }
     }
@@ -158,6 +167,12 @@ export interface Database {
     }
     Functions: {
       is_user_admin: {
+        Args: {
+          user_id: string
+        }
+        Returns: boolean
+      }
+      is_user_member: {
         Args: {
           user_id: string
         }
@@ -239,6 +254,7 @@ export interface Database {
           owner: string | null
           path_tokens: string[] | null
           updated_at: string | null
+          version: string | null
         }
         Insert: {
           bucket_id?: string | null
@@ -250,6 +266,7 @@ export interface Database {
           owner?: string | null
           path_tokens?: string[] | null
           updated_at?: string | null
+          version?: string | null
         }
         Update: {
           bucket_id?: string | null
@@ -261,6 +278,7 @@ export interface Database {
           owner?: string | null
           path_tokens?: string[] | null
           updated_at?: string | null
+          version?: string | null
         }
       }
     }
@@ -268,6 +286,15 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
+      can_insert_object: {
+        Args: {
+          bucketid: string
+          name: string
+          owner: string
+          metadata: Json
+        }
+        Returns: undefined
+      }
       extension: {
         Args: {
           name: string

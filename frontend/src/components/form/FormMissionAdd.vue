@@ -55,14 +55,13 @@
       </section>
     </div>
     <div class="form-footer">
-      <button class="btn grey" @click="() => formStore.closeForm()">Annuler</button>
+      <button class="btn grey" @click="() => emits('close')">Annuler</button>
       <button type="submit" class="btn">Créer</button>
     </div>
   </form>
 </template>
 
 <script setup lang="ts">
-import { useFormStore } from "@/stores/form";
 import { supabase, useUserStore } from "@/stores/supabase";
 import FileIcon from "@/components/shared/icons/FileIcon.vue";
 import TextInput from "../shared/form/TextInput.vue";
@@ -83,8 +82,11 @@ import HashtagIcon from "@/components/shared/icons/HashtagIcon.vue";
 import EmailIcon from "@/components/shared/icons/EmailIcon.vue";
 import PhoneIcon from "@/components/shared/icons/PhoneIcon.vue";
 
+const emits = defineEmits<{
+  (e: 'close'): void;
+}>();
+
 const userStore = useUserStore();
-const formStore = useFormStore();
 
 const existingClient = ref(false);
 
@@ -187,7 +189,7 @@ async function createMission() {
 
   await useMissionStore().fetchMissions();
 
-  formStore.closeForm();
+  emits('close');
   return;
 }
 </script>

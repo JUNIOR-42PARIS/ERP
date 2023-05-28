@@ -1,4 +1,6 @@
 import FormMissionAddVue from '@/components/form/FormMissionAdd.vue';
+import FormMemberEditVue from '@/components/form/FormMemberEdit.vue';
+
 import { defineStore } from 'pinia';
 import { computed, shallowRef, type Component, type Ref } from 'vue';
 
@@ -9,6 +11,10 @@ export const useFormStore = defineStore('form', () => {
     selectedForm.value = FormMissionAddVue;
   }
 
+  function showMemberEdit() {
+    selectedForm.value = FormMemberEditVue;
+  }
+
   function closeForm() {
     selectedForm.value = undefined;
   }
@@ -17,11 +23,13 @@ export const useFormStore = defineStore('form', () => {
     switch (selectedForm.value) {
       case FormMissionAddVue:
         return "Créer un prospect/mission";
+      case FormMemberEditVue:
+        return "Modifier un membre";
 
       default:
         return "Inconnu";
     }
   });
 
-  return { selectedForm, showMissionCreate, closeForm, getFormName };
+  return { selectedForm, showMissionCreate, showMemberEdit, closeForm, getFormName };
 });

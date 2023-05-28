@@ -22,7 +22,7 @@ export function isNameTextLengthValid(min = 1, max = 50): (value: string) => Val
     if (valueTrimed.length < min) {
       return `Le texte est trop court (au moins ${min} caractères)`;
     }
-    if (valueTrimed.length >= max) {
+    if (valueTrimed.length > max) {
       return `Le texte est trop long (au max. ${max} caractères)`;
     }
     return true;

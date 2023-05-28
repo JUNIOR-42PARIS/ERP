@@ -6,7 +6,12 @@
         <header>
           <h2>{{ formStore.getFormName }}</h2>
         </header>
-        <component :is="formStore.selectedForm"></component>
+        <Suspense>
+          <component :is="formStore.selectedForm" @close="formStore.closeForm()"></component>
+          <template #fallback>
+            Chargement...
+          </template>
+        </Suspense>
       </div>
     </div>
   </Transition>

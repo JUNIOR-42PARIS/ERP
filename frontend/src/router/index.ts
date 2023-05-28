@@ -50,6 +50,11 @@ const router = createRouter({
           component: () => import('../views/Mission/MissionResumeView.vue')
         },
       ]
+    },
+    {
+      path: '/ressources-humaines',
+      name: 'ressources-humaines',
+      component: () => import('../views/RessourceHumaineView.vue')
     }
   ]
 });

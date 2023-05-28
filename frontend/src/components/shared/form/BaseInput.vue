@@ -1,39 +1,24 @@
 <template>
-  <BaseInput :name="props.name" :icon="props.icon" :label="props.label" :modelValue="props.modelValue" :required="props.required" :error="error">
-    <input type="text" :id="props.name" :name="props.name" v-model="value" :placeholder="props.label.toLowerCase()" :required="props.required === true">
-  </BaseInput>
+  <label :style="{fontStyle: props.required !== true ? 'italic' : ''}" :class="{ 'error': error }" :for="props.name">{{ props.label }}</label>
+  <div class="input" :class="{'error': error }" v-if="props.icon">
+    <component :is="props.icon" class="icon" :width="20" :height="20" :color="error ? '#B41F1F' : '#A3A3A3'" />
+    <slot></slot>
+  </div>
+  <slot v-else :class="{'input': true, 'error': error }"></slot>
+  <span class="error-text">{{ error ?? '' }}</span>
 </template>
 
 <script setup lang="ts">
 import type { ValidationReturnType } from "@/utils/validation";
-import { computed, type Component } from "vue";
-import BaseInput from "./BaseInput.vue";
+import type { Component } from "vue";
 
 const props = defineProps<{
-  icon: Component,
+  icon?: Component,
   label: string,
   name: string,
-  modelValue?: string,
   required?: boolean,
-  validation?: (value: string) => ValidationReturnType,
+  error: ValidationReturnType,
 }>();
-const emits = defineEmits(['update:modelValue']);
-
-const error = computed((): ValidationReturnType => {
-  if (props.validation && props.validation(props.modelValue ?? "") !== true) {
-    return props.validation(props.modelValue ?? "");
-  }
-  return "";
-});
-
-const value = computed({
-  get() {
-    return props.modelValue;
-  },
-  set(value) {
-    emits("update:modelValue", value);
-  }
-});
 </script>
 
 <style lang="scss" scoped>
