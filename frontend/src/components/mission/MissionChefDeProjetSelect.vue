@@ -15,7 +15,8 @@
       v-model="idNewCDP"
       width="100px"
       @close="editCdp"
-      data-test="select"
+      ref="selectCdp"
+      style="width: 450px"
     />
   </template>
 </template>
@@ -23,7 +24,7 @@
 <script lang="ts" setup>
 import { useMemberStore, type Member } from '@/stores/member';
 import { IntervenantType, type MissionRowWithMemberList } from '@/stores/mission';
-import { computed, ref } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 import Multiselect from 'vue-multiselect';
 
 const props = defineProps<{
@@ -40,6 +41,7 @@ const emits = defineEmits<{
 }>();
 
 const memberStore = useMemberStore();
+const selectCdp = ref<Multiselect>();
 
 const isEditingCdp = ref<boolean>(false);
 const idNewCDP = ref<Member | null>(null);
@@ -65,6 +67,12 @@ async function toggleEditionCdp() {
   }
 
   isEditingCdp.value = !isEditingCdp.value;
+
+  if (isEditingCdp.value) {
+    nextTick(() => {
+      selectCdp.value?.activate();
+    });
+  }
 }
 
 async function editCdp() {
@@ -81,5 +89,9 @@ async function editCdp() {
 <style lang="scss" scoped>
 svg {
   cursor: pointer;
+}
+
+.no-cdp {
+  font-style: italic;
 }
 </style>

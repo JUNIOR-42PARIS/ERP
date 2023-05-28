@@ -125,7 +125,4 @@ nav {
   }
 }
 
-.no-cdp {
-  font-style: italic;
-}
 </style>
