@@ -48,7 +48,7 @@ const router = createRouter({
           path: 'calendrier',
           name: 'missions-calendrier',
           component: () => import('../views/Mission/MissionResumeView.vue')
-        },
+        }
       ]
     },
     {

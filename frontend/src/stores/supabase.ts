@@ -3,7 +3,6 @@ import { createClient, type User } from '@supabase/supabase-js';
 import { defineStore } from 'pinia';
 import { ref, type Ref } from 'vue';
 
-
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 export const supabase = createClient<Database>(supabaseUrl, supabaseKey);
@@ -21,10 +20,9 @@ export const useUserStore = defineStore('user', () => {
     });
     isAdmin.value = data_is_admin === true;
 
-    const { data: data_is_member } = await supabase
-      .rpc('is_user_member', {
-        user_id: new_user.id
-      });
+    const { data: data_is_member } = await supabase.rpc('is_user_member', {
+      user_id: new_user.id
+    });
     isMember.value = data_is_member === true;
   }
 

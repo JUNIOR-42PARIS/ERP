@@ -34,10 +34,19 @@
     </thead>
     <tbody>
       <tr v-for="mission of missions" :key="mission.id">
-        <td><RouterLink class="lien-mission" :to="{ name: 'missions-index', params: { idMission: mission.nom } }">#{{ mission.nom }}</RouterLink></td> <!-- @TODO -->
-        <td><RouterLink to="/profile/cdp1">@cdp1</RouterLink></td> <!-- @TODO -->
-        <td class="date">{{ new Date(mission.created_at).toLocaleDateString('fr-FR') }}</td> <!-- @TODO -->
-        <td class="date">{{ new Date(mission.created_at).toLocaleDateString('fr-FR') }}</td>
+        <td>
+          <RouterLink
+            class="lien-mission"
+            :to="{ name: 'missions-index', params: { idMission: mission.nom } }"
+            >#{{ mission.nom }}</RouterLink
+          >
+        </td>
+        <!-- @TODO -->
+        <td><RouterLink to="/profile/cdp1">@cdp1</RouterLink></td>
+        <!-- @TODO -->
+        <td class="date">{{ new Date(mission.created_at ?? '').toLocaleDateString('fr-FR') }}</td>
+        <!-- @TODO -->
+        <td class="date">{{ new Date(mission.created_at ?? '').toLocaleDateString('fr-FR') }}</td>
       </tr>
       <tr v-if="missions.length === 0">
         <td colspan="4" class="empty">Aucune mission à afficher</td>
@@ -47,11 +56,11 @@
 </template>
 
 <script lang="ts" setup>
-import MissionStatus from "@/types/missionStatus";
-import CarretIcon from "@/components/shared/icons/CarretIcon.vue";
-import { useMissionStore } from "@/stores/mission";
-import RotationType from "@/types/rotation";
-import { computed } from "vue";
+import MissionStatus from '@/types/missionStatus';
+import CarretIcon from '@/components/shared/icons/CarretIcon.vue';
+import { useMissionStore } from '@/stores/mission';
+import RotationType from '@/types/rotation';
+import { computed } from 'vue';
 
 const props = defineProps({
   type: {
@@ -60,21 +69,20 @@ const props = defineProps({
     default: MissionStatus.mission,
     validator(value: string) {
       return Object.keys(MissionStatus).includes(value);
-    },
+    }
   }
 });
 
 const missionStore = useMissionStore();
 
 const missions = computed(() => {
-  if (!missionStore.missions)
-    return [];
+  if (!missionStore.missions) return [];
   return missionStore.missions?.filter((mission) => mission.status === props.type);
 });
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/variables.scss";
+@import '@/assets/variables.scss';
 
 .carret {
   cursor: pointer;
@@ -83,14 +91,14 @@ const missions = computed(() => {
 table {
   width: 100%;
   margin-top: 30px;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   background-color: white;
 
   thead {
     background-color: $light-primary;
     color: $text-white;
     font-weight: 600;
-    
+
     th {
       padding-top: 18px;
       padding-bottom: 18px;
@@ -156,7 +164,7 @@ table {
           text-align: right;
           color: $text-grey;
         }
-        
+
         &.empty {
           text-align: center;
           color: $text-grey;
@@ -164,10 +172,10 @@ table {
       }
 
       &::after {
-        content: "";
+        content: '';
         height: 1px;
         width: 85%;
-        background-color: #F4F4F4;
+        background-color: #f4f4f4;
         display: block;
         position: absolute;
         bottom: 0;

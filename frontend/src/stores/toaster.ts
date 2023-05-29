@@ -1,16 +1,17 @@
-import { defineStore } from "pinia";
-import { ref, type Ref } from "vue";
+import { defineStore } from 'pinia';
+import { ref, type Ref } from 'vue';
 
 export enum ToastType {
-  success = "success",
-  error = "error",
-  warning = "warning",
-  info = "info",
+  success = 'success',
+  error = 'error',
+  warning = 'warning',
+  info = 'info'
 }
 
-export const useToasterStore = defineStore("toaster", () => {
+export const useToasterStore = defineStore('toaster', () => {
   let id = 1;
-  const toasts: Ref<{ id: number; content: string; type: ToastType, interval: NodeJS.Timer }[]> = ref([]);
+  const toasts: Ref<{ id: number; content: string; type: ToastType; interval: NodeJS.Timer }[]> =
+    ref([]);
 
   function addToast(content: string, type: ToastType): void {
     const currentID = id;

@@ -103,22 +103,19 @@ export interface Database {
       }
       missions_intervenants: {
         Row: {
-          created_at: string
-          id: number
-          intervenant: string
-          mission: number | null
+          id_mission: number
+          id_user: string
+          type: Database["public"]["Enums"]["intervenants_type"] | null
         }
         Insert: {
-          created_at?: string
-          id?: number
-          intervenant: string
-          mission?: number | null
+          id_mission: number
+          id_user: string
+          type?: Database["public"]["Enums"]["intervenants_type"] | null
         }
         Update: {
-          created_at?: string
-          id?: number
-          intervenant?: string
-          mission?: number | null
+          id_mission?: number
+          id_user?: string
+          type?: Database["public"]["Enums"]["intervenants_type"] | null
         }
       }
       roles: {
@@ -180,6 +177,7 @@ export interface Database {
       }
     }
     Enums: {
+      intervenants_type: "cdp" | "developpeur"
       mission_status: "prospect" | "mission" | "abandonnee" | "finie"
     }
     CompositeTypes: {

@@ -8,9 +8,7 @@
         </header>
         <Suspense>
           <component :is="formStore.selectedForm" @close="formStore.closeForm()"></component>
-          <template #fallback>
-            Chargement...
-          </template>
+          <template #fallback> Chargement... </template>
         </Suspense>
       </div>
     </div>
@@ -24,23 +22,23 @@ const formStore = useFormStore();
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/variables.scss";
+@import '@/assets/variables.scss';
 
 .slide-form-enter-active {
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
   #form-flou,
   #form-side-panel {
-    transition: all .2s ease-in-out;
+    transition: all 0.2s ease-in-out;
   }
 }
 
 .slide-form-leave-active {
-  transition: all .2s ease-in;
+  transition: all 0.2s ease-in;
 
   #form-flou,
   #form-side-panel {
-    transition: all .2s ease-in;
+    transition: all 0.2s ease-in;
   }
 }
 
@@ -65,7 +63,7 @@ const formStore = useFormStore();
     background: $bg-white;
     z-index: 100;
 
-    >header {
+    > header {
       height: 80px;
       background-color: $primary;
 
