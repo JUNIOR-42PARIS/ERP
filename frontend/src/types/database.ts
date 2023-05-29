@@ -141,6 +141,7 @@ export interface Database {
           id_user: string
           name: string
           phone: string
+          pseudo: string | null
           role: string | null
         }
         Insert: {
@@ -148,6 +149,7 @@ export interface Database {
           id_user: string
           name?: string
           phone?: string
+          pseudo?: string | null
           role?: string | null
         }
         Update: {
@@ -155,6 +157,7 @@ export interface Database {
           id_user?: string
           name?: string
           phone?: string
+          pseudo?: string | null
           role?: string | null
         }
       }

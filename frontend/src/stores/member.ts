@@ -21,7 +21,7 @@ export const useMemberStore = defineStore('member', () => {
     memberList.value = [];
     const users = await supabase
       .from('users_informations')
-      .select('id_user, name, email, phone, role');
+      .select('*');
     if (users.error) {
       console.error(users.error);
     }
