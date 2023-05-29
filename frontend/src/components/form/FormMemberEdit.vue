@@ -1,8 +1,11 @@
 <template>
-  <form v-if="memberEditing" @submit.prevent="editMember">
+  <form v-if="memberEditing" @submit.prevent="editMember" method="post">
     <div class="form-container">
       <div class="form-row">
         <TextInput :icon="UserIcon" name="name" label="Prénom Nom" v-model="memberEditing.name" :validation="isNameTextLengthValid()" :required="true" />
+      </div>
+      <div class="form-row">
+        <TextInput :icon="UserIcon" name="pseudo" label="Pseudo 42 du membre" v-model="memberEditing.pseudo" :validation="isNameTextLengthValid(0, 10)" :required="true"/>
       </div>
       <div class="form-row">
         <SelectInput label="Role" name="role" :options="roleNameList" :searchable="true" :show-labels="false" v-model="memberEditing.role" />
@@ -59,6 +62,7 @@ async function editMember() {
       role: memberEditing.value.role,
       phone: memberEditing.value.phone,
       email: memberEditing.value.email,
+      pseudo: memberEditing.value.pseudo,
     });
     await memberStore.fetchMembers();
     emits("close");

@@ -12,15 +12,15 @@
 
           <div class="carte-element-liste">
             <div class="ligne-importante">
-              <p>Bienvenue à <RouterLink to="/membre/cdp2" class="resource-link">@cdp2</RouterLink> qui rejoint les CDP</p>
+              <p>Bienvenue à <MemberLink :member="fakeMember" /> qui rejoint les CDP</p>
               <span class="date">21/02/2023</span>
             </div>
             <div class="ligne-importante">
-              <p>Nouveau prospect <RouterLink to="/mission/mission-01" class="resource-link">#mission-01</RouterLink></p>
+              <p>Nouveau prospect <MissionLink :mission="fakeMission" /></p>
               <span class="date">21/02/2023</span>
             </div>
             <div class="ligne-importante">
-              <p>Prospect converti en client <RouterLink to="/mission/mission-02" class="resource-link">#mission-02</RouterLink> 🎉</p>
+              <p>Prospect converti en client <MissionLink :mission="fakeMission" /> 🎉</p>
               <span class="date">21/02/2023</span>
             </div>
           </div>
@@ -30,15 +30,15 @@
 
           <div class="carte-element-liste">
             <div class="ligne-importante">
-              <RouterLink to="/mission/mission-01" class="resource-link">#mission-01</RouterLink>
+              <MissionLink :mission="fakeMission" />
               <span class="date">Dernière màj il y a 10 min</span>
             </div>
             <div class="ligne-importante">
-              <RouterLink to="/mission/mission-02" class="resource-link">#mission-02</RouterLink>
+              <MissionLink :mission="fakeMission" />
               <span class="date">Dernière màj il y a 18 heures</span>
             </div>
             <div class="ligne-importante">
-              <RouterLink to="/mission/mission-03" class="resource-link">#mission-03</RouterLink>
+              <MissionLink :mission="fakeMission" />
               <span class="date">Dernière màj il y a 2 mois</span>
             </div>
           </div>
@@ -52,14 +52,34 @@
 </template>
 
 <script setup lang="ts">
-import { supabase } from '@/stores/supabase';
+import MemberLink from '@/components/shared/MemberLink.vue';
+import MissionLink from '@/components/shared/MissionLink.vue';
+import type { Member } from '@/stores/member';
+import type { MissionRow } from '@/stores/mission';
 
-async function test() {
-  await supabase.functions.invoke('Notify', {
-    body: JSON.stringify({ name: 'Functions' }),
-  });
-}
-test();
+const fakeMember: Member = {
+  name: "cdp2",
+  role: "chef de projet",
+  email: "cdp@test.com",
+  phone: "",
+  pseudo: "cdp2",
+  id_user: "",
+};
+
+const fakeMission: MissionRow = {
+  nom: "mission-01",
+  id: 0,
+  client: "",
+  status: "prospect",
+  created_by: "",
+  telephone_intermediaire: null,
+  created_at: new Date().toLocaleString(),
+  lien_drive: "",
+  description: "",
+  lien_github: "",
+  nom_intermediaire: "",
+  email_intermediaire: "",
+};
 </script>
 
 <style lang="scss" scoped>
