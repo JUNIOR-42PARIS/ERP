@@ -22,12 +22,12 @@ export const useFormStore = defineStore('form', () => {
   const getFormName = computed(() => {
     switch (selectedForm.value) {
       case FormMissionAddVue:
-        return "Créer un prospect/mission";
+        return 'Créer un prospect/mission';
       case FormMemberEditVue:
-        return "Modifier un membre";
+        return 'Modifier un membre';
 
       default:
-        return "Inconnu";
+        return 'Inconnu';
     }
   });
 

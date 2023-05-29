@@ -1,4 +1,5 @@
 {
     "editor.tabSize": 2,
-    "typescript.format.semicolons": "insert"
+    "typescript.format.semicolons": "insert",
+    "typescript.tsdk": "node_modules/typescript/lib"
 }

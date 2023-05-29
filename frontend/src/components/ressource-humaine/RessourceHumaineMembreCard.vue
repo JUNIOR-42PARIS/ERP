@@ -7,7 +7,12 @@
           <p v-if="props.member.pseudo" class="member-pseudo">@{{ props.member.pseudo }}</p>
         </div>
 
-        <font-awesome-icon :icon="['fas', 'gear']" class="card-rh-member-content-header-gear" v-if="canUserEditMember" @click="editMember" />
+        <font-awesome-icon
+          :icon="['fas', 'gear']"
+          class="card-rh-member-content-header-gear"
+          v-if="canUserEditMember"
+          @click="editMember"
+        />
       </div>
     </div>
     <div class="card-rh-member-footer">
@@ -25,10 +30,10 @@
 </template>
 
 <script lang="ts" setup>
-import { useFormStore } from "@/stores/form";
-import { useMemberStore, type Member } from "@/stores/member";
-import { useUserStore } from "@/stores/supabase";
-import { computed } from "vue";
+import { useFormStore } from '@/stores/form';
+import { useMemberStore, type Member } from '@/stores/member';
+import { useUserStore } from '@/stores/supabase';
+import { computed } from 'vue';
 
 const props = defineProps<{
   member: Member,
@@ -61,7 +66,7 @@ function setActive() {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/variables.scss";
+@import '@/assets/variables.scss';
 
 .card-rh-member {
   background: $bg-white;
@@ -83,7 +88,7 @@ function setActive() {
     height: 80%;
     padding: 10px;
     box-sizing: border-box;
-    
+
     &-header {
       display: flex;
       flex-flow: row nowrap;

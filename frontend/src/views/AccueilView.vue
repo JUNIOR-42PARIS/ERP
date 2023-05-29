@@ -83,24 +83,25 @@ const fakeMission: MissionRow = {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/variables.scss";
+@import '@/assets/variables.scss';
 
-.grid-col, .grid-row {
+.grid-col,
+.grid-row {
   display: flex;
   flex-wrap: nowrap;
   gap: 22px;
-  
+
   &.grid-col {
     width: 100%;
 
     flex-direction: row;
     justify-content: stretch;
-    
+
     > * {
       width: 50%;
     }
   }
-  
+
   &.grid-row {
     flex-direction: column;
     justify-content: flex-start;
@@ -121,7 +122,7 @@ const fakeMission: MissionRow = {
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
-    font-family: "Roboto";
+    font-family: 'Roboto';
   }
 }
 
@@ -147,7 +148,9 @@ const fakeMission: MissionRow = {
 
       margin-bottom: 10px;
 
-      p, span, a {
+      p,
+      span,
+      a {
         font-size: 14px;
         font-weight: 400;
       }

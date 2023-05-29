@@ -2,20 +2,46 @@
   <form v-if="memberEditing" @submit.prevent="editMember" method="post">
     <div class="form-container">
       <div class="form-row">
-        <TextInput :icon="UserIcon" name="name" label="Prénom Nom" v-model="memberEditing.name" :validation="isNameTextLengthValid()" :required="true" />
+        <TextInput
+          :icon="UserIcon"
+          name="name"
+          label="Prénom Nom"
+          v-model="memberEditing.name"
+          :validation="isNameTextLengthValid()"
+          :required="true"
+        />
       </div>
       <div class="form-row">
         <TextInput :icon="UserIcon" name="pseudo" label="Pseudo 42 du membre" v-model="memberEditing.pseudo" :validation="isNameTextLengthValid(0, 10)" :required="true"/>
       </div>
       <div class="form-row">
-        <SelectInput label="Role" name="role" :options="roleNameList" :searchable="true" :show-labels="false" v-model="memberEditing.role" />
+        <SelectInput
+          label="Role"
+          name="role"
+          :options="roleNameList"
+          :searchable="true"
+          :show-labels="false"
+          v-model="memberEditing.role"
+        />
       </div>
-      
+
       <div class="form-row">
-        <TextInput :icon="EmailIcon" name="mission_email_intermediaire" label="Email de l'intermédiaire" v-model="memberEditing.email" :validation="isNameTextLengthValid()"/>
+        <TextInput
+          :icon="EmailIcon"
+          name="mission_email_intermediaire"
+          label="Email de l'intermédiaire"
+          v-model="memberEditing.email"
+          :validation="isNameTextLengthValid()"
+        />
       </div>
       <div class="form-row">
-        <TextInput :icon="PhoneIcon" name="mission_telephone_intermediaire" label="Téléphone de l'intermédiaire" v-model="memberEditing.phone" :validation="isNameTextLengthValid(0, 10)"/>
+        <TextInput
+          :icon="PhoneIcon"
+          name="mission_telephone_intermediaire"
+          label="Téléphone de l'intermédiaire"
+          v-model="memberEditing.phone"
+          :validation="isNameTextLengthValid(0, 10)"
+        />
       </div>
     </div>
 
@@ -38,7 +64,7 @@ import { isNameTextLengthValid } from '@/utils/validation';
 import SelectInput from '../shared/form/SelectInput.vue';
 
 const emits = defineEmits<{
-  (e: 'close'): void
+  (e: 'close'): void;
 }>();
 
 const memberStore = useMemberStore();
@@ -65,7 +91,7 @@ async function editMember() {
       pseudo: memberEditing.value.pseudo,
     });
     await memberStore.fetchMembers();
-    emits("close");
+    emits('close');
     return;
   }
 }

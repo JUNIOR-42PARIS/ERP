@@ -11,20 +11,19 @@ import { onMounted } from 'vue';
 
 function login() {
   supabase.auth.signInWithOAuth({
-    provider: "google"
+    provider: 'google'
   });
 }
 
 onMounted(async () => {
   try {
     const { data, error } = await supabase.auth.getUser();
-    
+
     if (!error && data.user) {
-      router.replace("/");
+      router.replace('/');
     }
   } catch (err) {
     //
   }
 });
 </script>
-

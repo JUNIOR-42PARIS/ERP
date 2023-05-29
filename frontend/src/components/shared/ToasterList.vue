@@ -1,6 +1,12 @@
 <template>
   <div id="toaster">
-    <div v-for="toast of toasterStore.toasts" :key="toast.id" @click="() => toasterStore.removeToast(toast.id)" class="toast" :class="toast.type">
+    <div
+      v-for="toast of toasterStore.toasts"
+      :key="toast.id"
+      @click="() => toasterStore.removeToast(toast.id)"
+      class="toast"
+      :class="toast.type"
+    >
       {{ toast.content }}
     </div>
   </div>
@@ -9,12 +15,11 @@
 <script setup lang="ts">
 import { useToasterStore } from '@/stores/toaster';
 
-
 const toasterStore = useToasterStore();
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/variables.scss";
+@import '@/assets/variables.scss';
 
 #toaster {
   position: fixed;

@@ -8,15 +8,13 @@
         <RessourceHumaineMembreCard @active="() => setMemberActive(member.pseudo)" :active="memberActive === member.pseudo" v-for="member of memberList" :key="member.id_user" :member="member" />
       </div>
     </div>
-    <template #fallback>
-      Loading...
-    </template>
+    <template #fallback> Loading... </template>
   </Suspense>
 </template>
 
 <script lang="ts" setup>
 import RessourceHumaineMembreCard from '@/components/ressource-humaine/RessourceHumaineMembreCard.vue';
-import { useMemberStore, type Member } from "@/stores/member";
+import { useMemberStore, type Member } from '@/stores/member';
 import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -27,7 +25,7 @@ const memberStore = useMemberStore();
 await memberStore.fetchMembers();
 
 const memberList = computed((): Member[] => {
-  return memberStore.members;
+  return memberStore.memberList;
 });
 
 const memberActive = computed((): string => {
@@ -53,7 +51,7 @@ function setMemberActive(pseudo: string | null): void {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/views.scss";
+@import '@/assets/views.scss';
 
 .grid-rh {
   display: flex;

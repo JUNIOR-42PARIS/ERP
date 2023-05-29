@@ -1,18 +1,23 @@
-
 <template>
   <Toaster></Toaster>
   <FormComponent></FormComponent>
 
   <nav v-if="!!userStore.user">
-    <img src="./assets/logo.png" alt="Logo" id="navbar-logo">
+    <img src="./assets/logo.png" alt="Logo" id="navbar-logo" />
     <RouterLink :to="{ name: 'index' }" exact-active-class="active">Accueil</RouterLink>
     <RouterLink :to="{ name: 'missions' }" active-class="active">Missions</RouterLink>
     <RouterLink to="/reunions" active-class="active">Réunions</RouterLink>
-    <RouterLink to="/ressources-humaines" active-class="active" v-if="userStore.isMember">RH</RouterLink>
+    <RouterLink to="/ressources-humaines" active-class="active" v-if="userStore.isMember"
+      >RH</RouterLink
+    >
     <NavbarNotification id="notification" />
     <div id="user">
       <button @click="toggleUserDropdown">
-        <img :src="userStore.user.user_metadata.picture" alt="Avatar" referrerpolicy="no-referrer">
+        <img
+          :src="userStore.user.user_metadata.picture"
+          alt="Avatar"
+          referrerpolicy="no-referrer"
+        />
         {{ userStore.user.user_metadata.name }}
         <CarretIcon :height="19" :rotation="getUserDropdownCarretRotation" />
       </button>
@@ -24,9 +29,7 @@
 
   <Suspense>
     <RouterView />
-    <template #fallback>
-      Loading
-    </template>
+    <template #fallback> Loading </template>
   </Suspense>
 </template>
 
@@ -50,7 +53,7 @@ onMounted(async () => {
   const { data, error } = await supabase.auth.getUser();
   if (error) {
     console.error(error);
-    router.push("/login");
+    router.push('/login');
     return;
   }
   userStore.setUser(data.user);
@@ -58,7 +61,7 @@ onMounted(async () => {
 
 async function logout() {
   userStore.logout();
-  router.push("/login");
+  router.push('/login');
 }
 
 function toggleUserDropdown(): void {
@@ -73,7 +76,7 @@ const getUserDropdownCarretRotation = computed((): RotationType => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/variables.scss";
+@import '@/assets/variables.scss';
 
 nav {
   background: $primary;
@@ -86,8 +89,9 @@ nav {
   align-items: stretch;
   justify-content: flex-start;
 
-  a, button {
-    font-family: "Roboto", sans-serif;
+  a,
+  button {
+    font-family: 'Roboto', sans-serif;
     border: 0;
     line-height: 80px;
     font-size: 16px;
@@ -116,7 +120,8 @@ nav {
     position: relative;
     margin-right: 67px;
 
-    img, svg {
+    img,
+    svg {
       vertical-align: middle;
     }
 
