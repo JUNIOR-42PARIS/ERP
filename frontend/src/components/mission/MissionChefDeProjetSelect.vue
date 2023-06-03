@@ -1,8 +1,6 @@
 <template>
   <template v-if="!isEditingCdp">
-    <RouterLink v-if="cdp !== null" to="/membre/user1" class="resource-link">{{
-      cdp.name
-    }}</RouterLink>
+    <MemberLink v-if="cdp" :member="cdp" />
     <span class="no-cdp" v-else>Aucun</span>
 
     <font-awesome-icon :icon="['far', 'pen-to-square']" @click="toggleEditionCdp" />
@@ -26,6 +24,7 @@ import { useMemberStore, type Member } from '@/stores/member';
 import { IntervenantType, type MissionRowWithMemberList } from '@/stores/mission';
 import { computed, nextTick, ref } from 'vue';
 import Multiselect from 'vue-multiselect';
+import MemberLink from '../shared/MemberLink.vue';
 
 const props = defineProps<{
   mission: MissionRowWithMemberList;
@@ -70,7 +69,9 @@ async function toggleEditionCdp() {
 
   if (isEditingCdp.value) {
     nextTick(() => {
-      selectCdp.value?.activate();
+      if (selectCdp.value && selectCdp.value.activate) {
+        selectCdp.value.activate();
+      }
     });
   }
 }

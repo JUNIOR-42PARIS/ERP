@@ -118,6 +118,26 @@ export interface Database {
           type?: Database["public"]["Enums"]["intervenants_type"] | null
         }
       }
+      missions_phases: {
+        Row: {
+          created_at: string | null
+          id: number
+          id_mission: number
+          type: Database["public"]["Enums"]["phase_type"]
+        }
+        Insert: {
+          created_at?: string | null
+          id?: number
+          id_mission: number
+          type?: Database["public"]["Enums"]["phase_type"]
+        }
+        Update: {
+          created_at?: string | null
+          id?: number
+          id_mission?: number
+          type?: Database["public"]["Enums"]["phase_type"]
+        }
+      }
       roles: {
         Row: {
           color: string
@@ -182,6 +202,7 @@ export interface Database {
     Enums: {
       intervenants_type: "cdp" | "developpeur"
       mission_status: "prospect" | "mission" | "abandonnee" | "finie"
+      phase_type: "prospection" | "contractuelle" | "bon-commande" | "cloture"
     }
     CompositeTypes: {
       [_ in never]: never

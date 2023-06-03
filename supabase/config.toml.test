@@ -51,7 +51,7 @@ enable_signup = true
 
 [auth.email]
 # Allow/disallow new user signups via email to your project.
-enable_signup = false
+enable_signup = true
 # If enabled, a user will be required to confirm any email change on both the old, and new email
 # addresses. If disabled, only the new email is required to confirm.
 double_confirm_changes = false
@@ -62,7 +62,7 @@ enable_confirmations = false
 # `discord`, `facebook`, `github`, `gitlab`, `google`, `keycloak`, `linkedin`, `notion`, `twitch`,
 # `twitter`, `slack`, `spotify`, `workos`, `zoom`.
 [auth.external.google]
-enabled = true
+enabled = false
 client_id = ""
 secret = ""
 
