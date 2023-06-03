@@ -69,7 +69,9 @@ async function toggleEditionCdp() {
 
   if (isEditingCdp.value) {
     nextTick(() => {
-      selectCdp.value?.activate();
+      if (selectCdp.value && selectCdp.value.activate) {
+        selectCdp.value.activate();
+      }
     });
   }
 }
