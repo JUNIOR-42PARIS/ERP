@@ -18,7 +18,7 @@ jobs:
         with:
           version: latest
 
-      - run: cp ./supabase/config.toml.example ./supabase/config.toml
+      - run: cp ./supabase/config.toml.test ./supabase/config.toml
       - run: supabase db start
       - run: supabase db lint
       - run: supabase test db
