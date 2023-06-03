@@ -27,9 +27,10 @@ export const useUserStore = defineStore('user', () => {
   }
 
   async function logout() {
+    await supabase.auth.signOut();
     user.value = undefined;
     isAdmin.value = false;
-    await supabase.auth.signOut();
+    isMember.value = false;
   }
 
   return { user, isAdmin, isMember, setUser, logout };
