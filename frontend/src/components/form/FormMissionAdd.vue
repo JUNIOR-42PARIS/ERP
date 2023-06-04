@@ -123,7 +123,7 @@ import FileIcon from '@/components/shared/icons/FileIcon.vue';
 import TextInput from '../shared/form/TextInput.vue';
 import { computed, onMounted, ref, type Ref } from 'vue';
 import type { Database } from '@/types/database';
-import MissionStatus from '@/types/missionStatus';
+import { MissionStatus } from '@/domain/enums/MissionStatus';
 import Multiselect from 'vue-multiselect';
 import { useMissionStore } from '@/stores/mission';
 import { isNameTextLengthValid, isValidSiren } from '@/utils/validation';
@@ -136,6 +136,7 @@ import EuroIcon from '@/components/shared/icons/EuroIcon.vue';
 import HashtagIcon from '@/components/shared/icons/HashtagIcon.vue';
 import EmailIcon from '@/components/shared/icons/EmailIcon.vue';
 import PhoneIcon from '@/components/shared/icons/PhoneIcon.vue';
+import type { Client, ClientDTO } from '@/domain/types/Client';
 
 const emits = defineEmits<{
   (e: 'close'): void;
@@ -145,9 +146,9 @@ const userStore = useUserStore();
 
 const existingClient = ref(false);
 
-let clients: Database['public']['Tables']['clients']['Row'][] = [];
+let clients: Client[] = [];
 
-const client: Ref<Database['public']['Tables']['clients']['Insert']> = ref({
+const client: Ref<ClientDTO> = ref({
   adresse: '',
   nom: '',
   numero_tva: '',
@@ -197,8 +198,7 @@ async function loadClients() {
     console.error(error);
     return;
   }
-  clients = data as Database['public']['Tables']['clients']['Row'][];
-  console.log(clients);
+  clients = data as Client[];
 }
 
 async function createClient(): Promise<boolean> {

@@ -30,8 +30,9 @@
 </template>
 
 <script lang="ts" setup>
+import type { Member } from '@/domain/types/Member';
 import { useFormStore } from '@/stores/form';
-import { useMemberStore, type Member } from '@/stores/member';
+import { useMemberStore } from '@/stores/member';
 import { useUserStore } from '@/stores/supabase';
 import { computed } from 'vue';
 

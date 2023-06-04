@@ -6,7 +6,7 @@ import { factoryMember, factoryMissionWithMemberList } from '#/utils/factory';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import Multiselect from 'vue-multiselect';
 import { useMemberStore } from '@/stores/member';
-import { IntervenantType } from '@/stores/mission';
+import { IntervenantType } from '@/domain/enums/IntervenantType';
 
 vi.mock('@supabase/supabase-js', () => ({
   createClient: vi.fn()

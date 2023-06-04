@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { MissionRow } from '@/stores/mission';
+import type { MissionRow } from '@/domain/types/Mission';
 
 const props = defineProps<{
   mission: MissionRow;

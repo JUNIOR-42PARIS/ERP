@@ -1,0 +1,37 @@
+.card {
+    background-color: $bg-white;
+    padding: 24px 32px;
+    margin-bottom: 40px;
+
+    &-primary {
+        border-top: 3px solid $primary;
+    }
+
+    &-header {
+        display: flex;
+        flex-flow: row nowrap;
+
+        align-items: center;
+        justify-content: space-between;
+
+        padding-bottom: 25px;
+
+        border-bottom: 1px solid $separation-grey;
+
+        h3 {
+            font-size: 20px;
+            font-weight: 400;
+        }
+
+        .edit-icon {
+            height: 16px;
+            width: 16px;
+            color: $text-almost-black;
+        }
+    }
+
+    &-body {
+        padding-top: 25px;
+        font-family: "Roboto";
+    }
+}
