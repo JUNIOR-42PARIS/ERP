@@ -30,7 +30,7 @@ const props = defineProps<{
   mission: MissionRowWithMemberListAndClient;
 }>();
 
-const member: Member = props.mission.members_type[0].member ?? {
+const member: Member = props.mission.members_type[0]?.member ?? {
   email: "test@test.com",
   id_user: "",
   name: "Test",
