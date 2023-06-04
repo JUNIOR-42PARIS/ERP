@@ -21,13 +21,14 @@
 
 <script lang="ts" setup>
 import { useMemberStore, type Member } from '@/stores/member';
-import { IntervenantType, type MissionRowWithMemberList } from '@/stores/mission';
 import { computed, nextTick, ref } from 'vue';
 import Multiselect from 'vue-multiselect';
 import MemberLink from '../shared/MemberLink.vue';
+import { IntervenantType } from '@/domain/enums/IntervenantType';
+import type { MissionRowWithMemberListAndClient } from '@/domain/enums/Mission';
 
 const props = defineProps<{
-  mission: MissionRowWithMemberList;
+  mission: MissionRowWithMemberListAndClient;
 }>();
 const emits = defineEmits<{
   (

@@ -56,7 +56,7 @@
 </template>
 
 <script lang="ts" setup>
-import MissionStatus from '@/types/missionStatus';
+import { MissionStatus } from '@/domain/enums/MissionStatus';
 import CarretIcon from '@/components/shared/icons/CarretIcon.vue';
 import { useMissionStore } from '@/stores/mission';
 import RotationType from '@/types/rotation';

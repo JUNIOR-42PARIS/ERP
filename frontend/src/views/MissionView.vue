@@ -30,7 +30,7 @@ import MissionTable from '@/components/mission/MissionTable.vue';
 import { useUserStore } from '@/stores/supabase';
 import { useMissionStore } from '@/stores/mission';
 import { onMounted } from 'vue';
-import MissionStatus from '@/types/missionStatus';
+import { MissionStatus } from '@/domain/enums/MissionStatus';
 import { useFormStore } from '@/stores/form';
 
 const formStore = useFormStore();

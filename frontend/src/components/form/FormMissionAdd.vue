@@ -123,7 +123,7 @@ import FileIcon from '@/components/shared/icons/FileIcon.vue';
 import TextInput from '../shared/form/TextInput.vue';
 import { computed, onMounted, ref, type Ref } from 'vue';
 import type { Database } from '@/types/database';
-import MissionStatus from '@/types/missionStatus';
+import { MissionStatus } from '@/domain/enums/MissionStatus';
 import Multiselect from 'vue-multiselect';
 import { useMissionStore } from '@/stores/mission';
 import { isNameTextLengthValid, isValidSiren } from '@/utils/validation';

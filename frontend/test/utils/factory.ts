@@ -1,6 +1,7 @@
-import { MemberType, type Member } from '@/stores/member';
-import type { MissionRow, MissionRowWithMemberList } from '@/stores/mission';
-import MissionStatus from '@/types/missionStatus';
+import type { Client } from "@/domain/enums/Client";
+import type { MissionRow, MissionRowWithMemberListAndClient } from "@/domain/enums/Mission";
+import { MissionStatus } from "@/domain/enums/MissionStatus";
+import { MemberType, type Member } from "@/stores/member";
 
 export function factoryMission(mission: Partial<MissionRow> = {}): MissionRow {
   return {
@@ -20,12 +21,35 @@ export function factoryMission(mission: Partial<MissionRow> = {}): MissionRow {
   };
 }
 
-export function factoryMissionWithMemberList(
-  mission: Partial<MissionRowWithMemberList> = {}
-): MissionRowWithMemberList {
+export function factoryClient(client: Partial<Client> = {}): Client {
   return {
+    adresse: "",
+    created_at: new Date().toISOString(),
+    nom: "",
+    numero_tva: null,
+    siret: null,
+    ...client,
+  };
+}
+
+export function factoryMissionWithMemberList(
+  mission: Partial<MissionRowWithMemberListAndClient> = {},
+): MissionRowWithMemberListAndClient {
+  return {
+    id: 1,
+    description: '',
+    created_by: '',
+    email_intermediaire: '',
+    created_at: new Date().toISOString(),
+    lien_drive: '',
+    lien_github: '',
+    nom: '',
+    nom_intermediaire: '',
+    status: MissionStatus.prospect,
+    telephone_intermediaire: '',
     members_type: [],
-    ...factoryMission(mission)
+    client: factoryClient(mission.client),
+    ...mission,
   };
 }
 
@@ -35,6 +59,7 @@ export function factoryMember(member: Partial<Member> = {}): Member {
     id_user: '',
     name: '',
     phone: '',
+    pseudo: '',
     role: MemberType.Developpeur,
     ...member
   };

@@ -8,6 +8,13 @@ import {
   faGear as fasGear,
   faPencil as fasPencil,
   faCheck as fasCheck,
+  faUserPlus as fasUserPlus,
+  faFileImport as fasFileImport,
+  faFolderPlus as fasFolderPlus,
+  faCodePullRequest as fasCodePullRequest,
+  faUserMinus as fasUserMinus,
+  faFileCircleMinus as fasFileCircleMinus,
+  faQuestion as fasQuestion
 } from '@fortawesome/free-solid-svg-icons';
 import {
   faGithubAlt
@@ -20,7 +27,13 @@ import './assets/base.scss';
 
 const app = createApp(App);
 
-library.add(faEnvelope, fasMobileScreen, fasGear, faPenToSquare, fasPencil, fasCheck, faGithubAlt);
+library.add(faEnvelope, fasMobileScreen, fasGear, faPenToSquare, fasPencil, fasCheck, faGithubAlt, fasUserPlus,
+  fasFileImport,
+  fasFolderPlus,
+  fasCodePullRequest,
+  fasUserMinus,
+  fasFileCircleMinus,
+  fasQuestion,);
 
 app.use(createPinia());
 app.use(router);

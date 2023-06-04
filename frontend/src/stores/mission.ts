@@ -1,26 +1,13 @@
 import { ref, type Ref } from 'vue';
 import { defineStore } from 'pinia';
 import { supabase } from './supabase';
-import type { Database } from '@/types/database';
 import { useRoute } from 'vue-router';
-import type { Member } from './member';
-
-export type MissionRow = Database['public']['Tables']['missions']['Row'];
-export type MissionIntervenantRow = Database['public']['Tables']['missions_intervenants']['Row'];
-export type MissionRowWithMemberList = MissionRow & {
-  members_type: (MissionIntervenantRow & {
-    member: Member;
-  })[];
-};
-
-export enum IntervenantType {
-  CDP = 'cdp',
-  Developpeur = 'developpeur'
-}
+import type { MissionRow, MissionRowWithMemberListAndClient } from '@/domain/enums/Mission';
+import { IntervenantType } from '@/domain/enums/IntervenantType';
 
 export const useMissionStore = defineStore('missions', () => {
   const missions: Ref<MissionRow[] | undefined> = ref();
-  const mission: Ref<MissionRowWithMemberList | undefined> = ref();
+  const mission: Ref<MissionRowWithMemberListAndClient | undefined> = ref();
 
   function basicQuery() {
     return supabase.from('missions');
@@ -28,21 +15,21 @@ export const useMissionStore = defineStore('missions', () => {
 
   function basicSelectQuery() {
     return basicQuery().select(
-      '*, members_type:missions_intervenants(*, member:users_informations(*))'
+      '*, members_type:missions_intervenants(*, member:users_informations(*)), client(*)'
     );
   }
 
   async function fetchMissionById(
     id: number,
     force: boolean = false
-  ): Promise<MissionRowWithMemberList> {
+  ): Promise<MissionRowWithMemberListAndClient> {
     if (mission.value && mission.value.id === id && !force) {
       return mission.value;
     }
 
     const missionDbResult = await basicSelectQuery()
       .eq('id', id)
-      .maybeSingle<MissionRowWithMemberList>();
+      .maybeSingle<MissionRowWithMemberListAndClient>();
     if (missionDbResult.data) {
       mission.value = missionDbResult.data;
       return missionDbResult.data;
@@ -51,14 +38,14 @@ export const useMissionStore = defineStore('missions', () => {
     throw new Error('no data with this name');
   }
 
-  async function fetchMissionByName(nom: string): Promise<MissionRowWithMemberList> {
+  async function fetchMissionByName(nom: string): Promise<MissionRowWithMemberListAndClient> {
     if (mission.value && mission.value.nom === nom) {
       return mission.value;
     }
 
     const missionDbResult = await basicSelectQuery()
       .eq('nom', nom)
-      .maybeSingle<MissionRowWithMemberList>();
+      .maybeSingle<MissionRowWithMemberListAndClient>();
     if (missionDbResult.data) {
       mission.value = missionDbResult.data;
       return missionDbResult.data;
@@ -67,7 +54,7 @@ export const useMissionStore = defineStore('missions', () => {
     throw new Error('no data with this name');
   }
 
-  async function fetchMissionFromUrl(): Promise<MissionRow> {
+  async function fetchMissionFromUrl(): Promise<MissionRowWithMemberListAndClient> {
     return fetchMissionByName(useRoute().params.idMission as string);
   }
 
