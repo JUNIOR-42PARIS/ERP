@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Member } from '@/stores/member';
+import type { Member } from '@/domain/types/Member';
 
 const props = defineProps<{
   member: Member;

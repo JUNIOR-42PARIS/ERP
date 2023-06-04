@@ -22,9 +22,9 @@
 
 <script lang="ts" setup>
 import MissionResumeHistoriqueElement from '@/components/mission/resume/MissionResumeHistoriqueElement.vue';
-import type { MissionRowWithMemberListAndClient } from '@/domain/enums/Mission';
 import { MissionHistorique } from '@/domain/enums/MissionHistorique';
-import { type Member } from '@/stores/member';
+import type { Member } from '@/domain/types/Member';
+import type { MissionRowWithMemberListAndClient } from '@/domain/types/Mission';
 
 const props = defineProps<{
   mission: MissionRowWithMemberListAndClient;

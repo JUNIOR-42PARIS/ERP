@@ -1,7 +1,8 @@
-import type { Client } from "@/domain/enums/Client";
-import type { MissionRow, MissionRowWithMemberListAndClient } from "@/domain/enums/Mission";
+import { MemberType } from "@/domain/enums/MemberType";
 import { MissionStatus } from "@/domain/enums/MissionStatus";
-import { MemberType, type Member } from "@/stores/member";
+import type { Client } from "@/domain/types/Client";
+import type { Member } from "@/domain/types/Member";
+import type { MissionRow, MissionRowWithMemberListAndClient } from "@/domain/types/Mission";
 
 export function factoryMission(mission: Partial<MissionRow> = {}): MissionRow {
   return {

@@ -20,10 +20,10 @@
 
 <script lang="ts" setup>
 import { MissionHistorique } from '@/domain/enums/MissionHistorique';
-import type { Member } from '@/stores/member';
 import { computed } from 'vue';
 import MemberLink from '@/components/shared/MemberLink.vue';
 import { getFormattedDate } from '@/utils/time';
+import type { Member } from '@/domain/types/Member';
 
 const props = defineProps<{
   type: MissionHistorique,

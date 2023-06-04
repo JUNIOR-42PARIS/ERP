@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { MissionRowWithMemberListAndClient } from '@/domain/enums/Mission';
+import type { MissionRowWithMemberListAndClient } from '@/domain/types/Mission';
 
 const props = defineProps<{
   mission: MissionRowWithMemberListAndClient;

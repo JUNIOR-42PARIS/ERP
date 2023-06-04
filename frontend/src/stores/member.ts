@@ -1,17 +1,8 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { supabase } from './supabase';
-import type { Database } from '@/types/database';
-
-export type Member = Database['public']['Tables']['users_informations']['Row'];
-
-export enum MemberType {
-  President = 'president',
-  ResponsableIntervenants = 'responsable intervenants',
-  ResponsableTresorerie = 'responsable tresorerie',
-  Developpeur = 'développeur',
-  ChefDeProjet = 'chef de projet'
-}
+import type { Member } from '@/domain/types/Member';
+import { MemberType } from '@/domain/enums/MemberType';
 
 export const useMemberStore = defineStore('member', () => {
   const memberList = ref<Member[]>([]);
@@ -35,7 +26,7 @@ export const useMemberStore = defineStore('member', () => {
     memberList.value = [];
     const users = await supabase
       .from('users_informations')
-      .select('id_user, name, email, phone, role, roles!inner(name, is_administration)')
+      .select('id_user, name, pseudo, email, phone, role, roles!inner(name, is_administration)')
       .or(`name.eq."${MemberType.ChefDeProjet}",is_administration.is.true`, {
         foreignTable: 'roles'
       });

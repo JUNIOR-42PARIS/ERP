@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useMemberStore, type Member } from '@/stores/member';
+import { useMemberStore } from '@/stores/member';
 import TextInput from '../shared/form/TextInput.vue';
 import UserIcon from '../shared/icons/UserIcon.vue';
 import { computed, ref } from 'vue';
@@ -62,6 +62,7 @@ import EmailIcon from '../shared/icons/EmailIcon.vue';
 import PhoneIcon from '../shared/icons/PhoneIcon.vue';
 import { isNameTextLengthValid } from '@/utils/validation';
 import SelectInput from '../shared/form/SelectInput.vue';
+import type { Member } from '@/domain/types/Member';
 
 const emits = defineEmits<{
   (e: 'close'): void;
